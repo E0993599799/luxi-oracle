@@ -1,0 +1,53 @@
+{
+  "oracle": {
+    "name": "luxi-junior",
+    "full_name": "Luxi Junior Oracle",
+    "parent": "luxi-oracle",
+    "role": "Dashboard Specialist (Junior)",
+    "reports_to": "luxi-oracle",
+    "born": "2026-06-07",
+    "federation": {
+      "tag": "[MARCUZ:Luxi-Junior]",
+      "node": "tham-node",
+      "mode": "local",
+      "registry": "~/.config/maw/oracles.json"
+    },
+    "repo": {
+      "path": "luxi-oracle/",
+      "memory_root": "luxi-oracle/ψ/luxi-junior/",
+      "federation_branch": "chore/oracle-sync-2026-06-09"
+    },
+    "scope": [
+      "Dashboard UI/UX design and implementation",
+      "React component composition",
+      "Performance optimization for dashboards",
+      "Data visualization patterns",
+      "Responsive design testing"
+    ],
+    "school": {
+      "program": "agent-academy-continuity-101",
+      "enrolled": null,
+      "status": "NOT_ENROLLED",
+      "eligible_for_enrollment": "2026-06-14"
+    },
+    "mentorship": {
+      "role": "mentee",
+      "mentor": "luxi-oracle",
+      "focus_areas": [
+        "Dashboard architecture",
+        "UI component patterns",
+        "Performance profiling",
+        "Accessibility standards"
+      ],
+      "status": "active"
+    },
+    "capabilities": {
+      "dashboard_design": true,
+      "react_development": true,
+      "performance_optimization": true,
+      "ui_testing": true
+    },
+    "created_at": "2026-06-07T00:00:00Z",
+    "updated_at": "2026-06-10T00:00:00Z"
+  }
+}
