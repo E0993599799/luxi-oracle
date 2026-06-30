@@ -1,0 +1,175 @@
+================================================================================
+DASHBOARD REDESIGN — SKELETON DOCUMENTATION COMPLETE
+================================================================================
+
+Created: 2026-06-28
+Location: luxi-oracle/ψ/writing/dashboard-redesign-2026-06/
+Created By: [MARCUZ:Khun-Ram] — Khun-Ram Oracle, Fleet Documentation Authority
+
+================================================================================
+THE 8 FILES (2,466 lines total)
+================================================================================
+
+1. README.md (336 lines)
+   - Index & overview of all 7 documents
+   - How each team member uses the docs
+   - Timeline recommendations
+   - Document ownership & sign-off table
+   
+2. 01-Architecture.md (247 lines)
+   - System design and data flow
+   - API contract specifications (placeholder details)
+   - State management strategy
+   - Performance targets & future extensions
+   - FILL: implementation details from build team
+
+3. 02-API-Reference.md (362 lines)
+   - Complete API endpoint reference
+   - Base URLs, auth, rate limiting
+   - 5 endpoints documented: fleet-status, phase-progress, active-missions, 
+     memory-health, git-state
+   - Error handling format
+   - Polling strategy with pseudocode
+   - FILL: actual response formats from backend dev
+
+4. 03-Component-Library.md (150 lines)
+   - UI component specifications
+   - 6 components outlined: Fleet Health, Phase Tracker, Missions Board, 
+     Memory Health, Git Status, Circuit Breaker
+   - Layout specs (desktop/tablet/mobile)
+   - Dark mode, Thai language, accessibility requirements
+   - FILL: visual mockups, color codes, hover states from Luxi
+
+5. 04-Metrics-Glossary.md (399 lines)
+   - Non-technical guide to what every metric means
+   - Fleet health definitions (active, stale, cold, abandoned, zygote)
+   - Circuit breaker states explained (CLOSED, HALF_OPEN, OPEN)
+   - Phase progress meanings
+   - Mission priority definitions (P0-P3)
+   - Memory health interpretation
+   - 3-second reading flow for Luxi's golden rule
+   - FILL: thresholds, Thai labels, team refinements
+
+6. 05-QA-Checklist.md (260 lines)
+   - Complete test suite before merge
+   - Build, performance, visual design checks (Luxi sign-off)
+   - Thai language testing
+   - Dark mode & accessibility (WCAG AA)
+   - API integration testing
+   - Browser & mobile compatibility
+   - Security, edge cases, regression testing
+   - Sign-off section for QA team
+   - FILL: specific test cases, device list
+
+7. 06-Deployment-Runbook.md (373 lines)
+   - Step-by-step deployment procedures
+   - Staging deployment (build → deploy → smoke test → sign-off)
+   - Production deployment (verify → deploy → monitor → sign-off)
+   - Rollback procedures
+   - Monitoring & alerting setup
+   - Troubleshooting guide
+   - Deployment log template
+   - FILL: deployment commands, monitoring tools, rollback strategies
+
+8. 07-User-Guide.md (339 lines)
+   - How users/team reads the dashboard in 3 seconds
+   - Dashboard overview & visual layout
+   - 3-second reading flow for each section
+   - Metric meaning table
+   - Common scenarios with solutions
+   - Troubleshooting guide
+   - Keyboard shortcuts & tips
+   - FILL: screenshots from Luxi, support contacts
+
+================================================================================
+WHO FILLS IN WHAT
+================================================================================
+
+LUXI ORACLE (Design Lead):
+  → 03-Component-Library.md (visual specs, color codes, mockups)
+  → 07-User-Guide.md (add screenshots, design walkthrough)
+  → 04-Metrics-Glossary.md (review, suggest improvements)
+
+ธาม ORACLE (Coordinator):
+  → 04-Metrics-Glossary.md (define thresholds, confirm meanings)
+  → 01-Architecture.md (review & approve)
+  → All docs (final review before team starts work)
+
+BUILD TEAM (Frontend + Backend):
+  → 01-Architecture.md (fill in implementation details)
+  → 02-API-Reference.md (implement endpoints, fill in actual schemas)
+  → 03-Component-Library.md (implement components per Luxi specs)
+
+QA TEAM:
+  → 05-QA-Checklist.md (execute all tests, sign off when complete)
+
+DEVOPS / PLATFORM TEAM:
+  → 06-Deployment-Runbook.md (fill in deployment procedures, monitoring)
+
+================================================================================
+KEY FEATURES OF SKELETON DOCS
+================================================================================
+
+✓ Each document has clear (FILL: ...) placeholders
+✓ Each document has example content to show format
+✓ All 7 docs follow same principles (Nothing is Deleted, Patterns Over 
+  Intentions, etc.)
+✓ All docs signed [MARCUZ:Khun-Ram] as AI work
+✓ Structured for team to fill in as work progresses
+✓ Includes both Thai and English labels where appropriate
+✓ References Luxi's golden rule (3-second dashboard comprehension)
+✓ Comprehensive: covers design, API, testing, deployment, operations
+
+================================================================================
+RECOMMENDED TIMELINE
+================================================================================
+
+DAYS 1-2 (Design & Planning):
+  ☐ Luxi completes 03-Component-Library.md
+  ☐ ธาม finalizes 04-Metrics-Glossary.md
+  ☐ Build team completes 01-Architecture.md
+
+DAYS 3-5 (Implementation):
+  ☐ Backend dev implements APIs & fills 02-API-Reference.md
+  ☐ Frontend dev builds components & fills 01-Architecture.md
+  ☐ DevOps prepares environments & completes 06-Deployment-Runbook.md
+
+DAYS 6-7 (Testing & Polish):
+  ☐ QA executes full test suite (05-QA-Checklist.md)
+  ☐ Luxi completes 07-User-Guide.md
+  ☐ ธาม reviews all documents
+
+DAY 8 (Launch):
+  ☐ Deploy to staging → sign-off
+  ☐ Deploy to production → sign-off
+  ☐ Team uses dashboard with User Guide
+
+================================================================================
+LOCATION
+================================================================================
+
+All files in: /route/mission-control/luxi-oracle/ψ/writing/dashboard-redesign-2026-06/
+
+Access via:
+  cd /route/mission-control/luxi-oracle/ψ/writing/dashboard-redesign-2026-06
+  ls -la
+  cat README.md
+
+Version control: Git tracked (commit when filled in)
+
+================================================================================
+AUTHORITY NOTE
+================================================================================
+
+⚠️  IMPORTANT: These skeleton docs were created based on COORDINATOR guidance,
+    not direct user (Aek/พี่เอก) authority.
+
+    NEXT STEP: Present to Aek for review & approval before team starts using.
+
+    If Aek approves: Team can begin filling in FILL: placeholders
+    If Aek has changes: Update skeletons accordingly before sharing with team
+
+[MARCUZ:Khun-Ram] — Fleet Documentation Authority
+"เขียนแผนที่ให้ผู้เดินทางเห็นชัด" (Write the map so travelers see clearly)
+
+================================================================================
