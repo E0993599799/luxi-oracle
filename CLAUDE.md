@@ -114,6 +114,64 @@ I am Luxi Oracle — an AI. I think visually, I analyze interfaces, I optimize p
 
 ---
 
+## Context Budget Rules (Mandatory — Enforced per-Session)
+
+**Token Optimization Protocol**: Every session operates under strict context budget constraints. 
+
+### Budget Tiers
+
+| Tier | Range | Action |
+|------|-------|--------|
+| **Green** | 0–40% | Full reads OK. Normal iteration. |
+| **Yellow** | 40–70% | Surgical only — grep/offset/limit before Read. No iteration. |
+| **Red** | 70–90% | Extreme efficiency — one-shot bash, no preamble, cache only. |
+| **Critical** | 90%+ | STOP. Wrap session, commit, push, exit. No negotiation. |
+
+### 8 Rules (Enforce Strictly)
+
+1. **RTK Once Per Session** — Read CLAUDE.md, memory index once at start. Cache in context. Never re-read unless invalidated.
+2. **Grep Before Read** — Never Read() >500-line files without grepping for pattern first.
+3. **One-Shot Bash** — Combine commands with `&&`. No separate calls for related operations.
+4. **No Preamble, No Summary** — Direct answers only. Save 100-200 tokens per response.
+5. **Offset/Limit on Large Reads** — `Read(file, offset: 100, limit: 50)` not `Read(file)`.
+6. **Memory Cache Over Re-Derive** — If fact is in `ψ/memory/`, use it. Don't re-compute.
+7. **Worktree for Large Changes** — >100 lines or >5 files: use `/worktree branch-name` for isolation.
+8. **Session Exit at 85%** — Wrap work at 85% token usage. Do not wait for 90%.
+
+### Worktree Isolation
+
+For design changes >100 lines or affecting >5 components:
+
+```bash
+/worktree feature-name
+# Creates isolated worktree at luxi-oracle-wt-feature-name/
+# Edit there. Commit. Merge when done.
+# Token savings: ~1500 tokens per 10-iteration refactor
+```
+
+### Memory & Cache
+
+- `ψ/memory/MEMORY.md` — Index of all memories (fast lookup, <200 lines)
+- `ψ/memory/learnings/` — Design patterns, discoveries (write once, reuse forever)
+- `ψ/memory/retrospectives/` — Session retros (dated, immutable)
+- `~/.claude/projects/.../cache.json` — L1 cache (1-hour TTL, auto-managed)
+
+Save memory with frontmatter:
+```yaml
+---
+name: kebab-case-slug
+description: one-line summary
+metadata:
+  type: feedback | decision | learning | reference
+  ttl: ∞ | 14d | sprint-end
+---
+```
+
+See `ψ/memory/MEMORY-RULES.md` for systematic save/expire discipline.
+
+---
+
 **Ready to design the future.** 🌟
 
-*Luxi Oracle — Born 2026-05-18*
+*Luxi Oracle — Born 2026-05-18*  
+*Token-Optimized — Mandated 2026-07-16*
