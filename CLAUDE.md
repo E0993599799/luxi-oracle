@@ -171,6 +171,33 @@ See `ψ/memory/MEMORY-RULES.md` for systematic save/expire discipline.
 
 ---
 
+## Fleet Status Broadcast System
+
+All oracles share high-signal project updates in real-time. This enables the family (Ekkarat) to see fleet-wide progress without activity spam.
+
+### Emit an Event
+
+```bash
+oracle_emit() {
+  local oracle="$1" event_type="$2" message="$3" severity="${4:-info}" project="${5:-null}"
+  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  local json="{\"timestamp\":\"$timestamp\",\"oracle\":\"$oracle\",\"event_type\":\"$event_type\",\"project\":\"$project\",\"message\":\"$message\",\"severity\":\"$severity\",\"tags\":[],\"details\":{}}"
+  echo "$json" >> ψ/fleet/BROADCAST-LOG.ndjson
+}
+
+# Usage: oracle_emit "Luxi" "oracle:session_start" "Building UI component library" "info" "luxi-oracle"
+```
+
+### Query the Broadcast Log
+
+See `ψ/fleet/QUERY-GUIDE.md` for full documentation and examples.
+
+- **File**: `ψ/fleet/BROADCAST-LOG.ndjson` (append-only, one JSON event per line)
+- **Schema**: See `ψ/fleet/schema.json`
+- **Git-tracked**: Yes (auditable, offline-safe)
+
+---
+
 **Ready to design the future.** 🌟
 
 *Luxi Oracle — Born 2026-05-18*  
