@@ -11,3 +11,16 @@ out/
 .idea/
 *.swp
 *.swo
+
+# Oracle vault — persistent (tracked) vs. ephemeral (excluded)
+ψ/inbox/          # Ephemeral: handoffs, escalations, inbox notes (14d expiry)
+ψ/active/         # Sprint-scoped: active goals, blockers, temporary focus
+ψ/**data/         # Transient session data (logs, caches, temp)
+!/ψ/memory/       # INCLUDE: persistent learnings, patterns, decisions (tracked)
+!/ψ/memory/**
+!/ψ/fleet/        # INCLUDE: fleet-wide strategy, config (tracked)
+!/ψ/fleet/**
+!/ψ/resonance/    # INCLUDE: joy moments, connection logs (tracked)
+
+# Fleet status broadcast utilities (tracked)
+!/scripts/fleet-*.sh
