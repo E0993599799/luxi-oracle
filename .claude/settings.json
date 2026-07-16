@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '. \"${CLAUDE_PROJECT_DIR}/scripts/fleet-emit.sh\" 2>/dev/null && oracle_emit \"Luxi\" \"oracle:session_start\" \"Session started\" \"info\" \"luxi-oracle\" && echo \"📡 Fleet: session broadcast enabled\"'",
+            "statusMessage": "Broadcasting session to fleet..."
+          }
+        ]
+      }
+    ]
+  }
+}

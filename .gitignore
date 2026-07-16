@@ -21,3 +21,6 @@ out/
 !/ψ/fleet/        # INCLUDE: fleet-wide strategy, config (tracked)
 !/ψ/fleet/**
 !/ψ/resonance/    # INCLUDE: joy moments, connection logs (tracked)
+
+# Fleet status broadcast utilities (tracked)
+!/scripts/fleet-*.sh
