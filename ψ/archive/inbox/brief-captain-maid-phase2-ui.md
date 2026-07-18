@@ -5,8 +5,21 @@ priority: high
 project: captain-maid
 phase: UI redesign phase 2
 assignee: luxi-oracle
-status: activated
+status: archived — closed by commits below (2026-07-19)
 ---
+
+> **ARCHIVED 2026-07-19** — Never formally acknowledged/closed in this inbox, but the work
+> this brief asked for was substantially completed directly in the `captain-maid` repo:
+>
+> - `6fe658d` (2026-07-19 03:52) — `feat: ship Captain Maid Direction A static web`
+> - `87975bc` (2026-07-19 03:52) — `merge: ship Captain Maid Direction A static web`
+> - `be772bc` (2026-07-19 06:38) — `feat: connect CMS and refine Thai UX copy`
+>
+> These cover the section-based UI ship and the Thai copy quality concerns raised below.
+> Not verified line-by-line against every checklist item in this brief (Lighthouse/WCAG AAA
+> sign-off, per-section success criteria) — if a formal audit report is needed later, treat
+> this brief's checklists as the reference and verify against current `captain-maid` state,
+> not against this note.
 
 # Brief: Captain Maid Phase 2 — UI/UX Redesign
 
