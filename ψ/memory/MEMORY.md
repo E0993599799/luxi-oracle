@@ -2,13 +2,16 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-07-16 · **Total Entries**: 2 · **Index Size**: ~200 tokens
+**Last Updated**: 2026-07-21 · **Total Entries**: 3 · **Index Size**: ~200 tokens
 
 ---
 
 ## System & Process Documentation
 - [Memory consolidation rules](MEMORY-RULES.md) — Systematic rules for what to save where, when, TTL (∞)
 - [Worktree isolation protocol](learnings/worktree-isolation-protocol.md) — Git worktree workflow for large changes (∞)
+
+## Debugging & Process Lessons
+- [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
 
 ---
 
