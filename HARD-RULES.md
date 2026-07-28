@@ -40,6 +40,27 @@
 
 ---
 
+## RULE 5: VERIFY CAPABILITY BEFORE COMMITTING TO IT
+
+**The Rule:** Before saying "I will use X system", verify it exists and is configured.
+
+**Protocol:**
+1. Search git history for recent setup (last 24 hours)
+2. Check related project code for existing implementation
+3. Read config files (.env, config/, docs/)
+4. Test the capability works
+5. THEN commit to using it
+
+**If capability not found:**
+- STOP immediately
+- Ask user how to proceed
+- Do NOT proceed blindly
+
+**Why:** This prevents single points of failure (like LINE configuration I forgot about).
+**Example:** I said I'd send to LINE without checking if it was configured. It was already in control_fleet.
+
+---
+
 ## COMMITMENT
 
 ✅ These rules are **PERMANENT**  
