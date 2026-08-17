@@ -50,6 +50,21 @@ recurs on something else hookable (color palettes, font names, other enumerable
 APIs), extend the same script's watched-package list rather than writing a new
 hook from scratch — the require/introspect/compare mechanism generalizes.
 
+**Extended 2026-08-18**: added `next/font/google`, `@next/font/google`,
+`tailwindcss/colors`, `@radix-ui/colors` to `WATCHED_PACKAGES` — same
+require/introspect/compare mechanism, blocking on proven-missing exports.
+Also added a *separate, non-blocking* check for Tailwind utility color
+classes (`bg-{color}-{shade}` etc. in JSX/className strings) — this isn't an
+import, so it needed its own regex scan against the default Tailwind palette
+plus any `tailwind.config.js`/`.cjs` custom colors it can load. Kept as a
+warning, not a block: wrong Tailwind color names don't error at build time,
+they just silently drop the class, so the false-positive cost of blocking
+(custom themes, unloadable TS/ESM configs) outweighed the benefit. Fails open
+entirely (no warning at all) when no loadable config is found, rather than
+guessing. All four paths (missing font export, missing color export, unknown
+class with config present, unknown class with no config) verified via
+pipe-tests against fixtures.
+
 **Next session**: confirm the hook is actually firing (`/hooks`, or trigger an
 Edit importing a real missing lucide-react name in a project that has it
 installed) and update `session-metrics.md`'s recurring-pattern note once confirmed
