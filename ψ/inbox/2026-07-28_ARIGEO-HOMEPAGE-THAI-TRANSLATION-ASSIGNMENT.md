@@ -6,17 +6,48 @@ date: 2026-07-28T12:00+07:00
 subject: ARIGEO Homepage — Thai Localization Assignment (Phase 1)
 priority: critical
 project: arigeo-project
-status: awaiting-acceptance
+status: translated-but-not-integrated
 type: formal-assignment
+updated: 2026-08-19T06:00:00Z
+update_note: >
+  Verified directly against D:\01 Main Work\Boots\Agentic AI\mission-control\arigeo-project
+  on 2026-08-19. Khun-Ram's translation (Phases 1-3) is done and QA-signed-off, but the
+  Integration Plan below (Luxi's responsibility) was never executed — see status block.
 ---
 
 # ARIGEO Homepage — Thai Localization Assignment
+
+> **⚠️ STATUS UPDATE (2026-08-19): Translated, QA-approved, but never wired into the live site.**
+>
+> **What's done** (Khun-Ram, commits `9f2703d`/`4ea4476`/`901dfbc`, all 2026-08-04):
+> `arigeo-project/locales/th.json` exists with the full 7-section scope this assignment asked
+> for (navigation/hero/introStatement/purpose/newsletter/footer/metadata, 88 lines). QA sign-off
+> (`901dfbc`, 11:55) confirms "All 100+ strings reviewed and approved" and explicitly hands off
+> to Luxi for the Integration Plan below.
+>
+> **What's NOT done** (the "Integration Plan (Luxi will handle)" section, never executed):
+> - The app's actual i18n loader (`src/i18n/request.ts:13`) imports `src/messages/${locale}.json`
+>   — **not** `locales/th.json`. Nothing in the codebase imports `locales/th.json` at all.
+> - `src/messages/th.json` is a *different* file (58 lines, 5 sections: Navigation/Hero/News/
+>   WhyChoose/Footer) in a different brand voice (pharma/agri distributor copy, not the Kao
+>   "we don't follow categories" homepage voice this assignment targeted). Last touched
+>   2026-08-09 for an unrelated apostrophe-escaping fix — no integration commit since 08-04.
+> - The live Kao-parity homepage components (`src/components/HeroShowreel.tsx`,
+>   `PurposeSection.tsx`) have **zero `useTranslations()`/`t()` calls and no locale branching**
+>   — e.g. `HeroShowreel.tsx:14` hardcodes `TAGLINE = ["We don't follow categories.", 'We create
+>   them.']` in English only, regardless of locale.
+> - The 2026-07-27 "bilingual support (en/th)" deployment claim (fleet broadcast) refers to the
+>   `/en`/`/th` URL routing existing, not translated homepage content.
+>
+> **Net effect**: the translation work this assignment requested is complete and sitting
+> ready in `locales/th.json`, but the Kao-parity homepage a Thai visitor actually sees today
+> is English-only. Integration (steps 1–6 under "Integration Plan" below) is the open item.
 
 **Requested by:** Luxi Oracle (UI/UX Designer)  
 **For:** Khun-Ram Oracle (Thai Language Authority + Memory Authority)  
 **Approval by:** พี่เอก (Ekkarat)  
 **Date:** 2026-07-28  
-**Status:** 🔴 Awaiting Khun-Ram Acceptance
+**Status:** ✅ Translation complete (Khun-Ram) · 🔴 Integration not started (Luxi)
 
 ---
 
@@ -134,23 +165,23 @@ Complete Thai-language localization of ARIGEO homepage (Kao Thailand brand). Hom
 
 ## Deliverables
 
-### Phase 1: Translation
-- [ ] Complete Thai translation of all 80-100 strings
-- [ ] Organized in JSON structure (by section)
-- [ ] Natural Thai phrasing verified
-- [ ] Cultural fit review (tone, idioms, references)
+### Phase 1: Translation ✅ COMPLETE (2026-08-04, `9f2703d`)
+- [x] Complete Thai translation of all 80-100 strings
+- [x] Organized in JSON structure (by section)
+- [x] Natural Thai phrasing verified
+- [x] Cultural fit review (tone, idioms, references)
 
-### Phase 2: Quality Assurance
-- [ ] Native Thai speaker review (Khun-Ram)
-- [ ] Brand voice consistency check
-- [ ] Read-aloud test (sounds natural when spoken?)
-- [ ] Grandma test (would non-technical user understand?)
-- [ ] No jargon, no meta-commentary, no internal copy
+### Phase 2: Quality Assurance ✅ COMPLETE (2026-08-04, `4ea4476` + `901dfbc`)
+- [x] Native Thai speaker review (Khun-Ram)
+- [x] Brand voice consistency check
+- [x] Read-aloud test (sounds natural when spoken?)
+- [x] Grandma test (would non-technical user understand?)
+- [x] No jargon, no meta-commentary, no internal copy
 
-### Phase 3: Handoff
-- [ ] Deliver `locales/th.json` file
-- [ ] Provide translation notes (tone decisions, cultural choices)
-- [ ] Ready for integration into build
+### Phase 3: Handoff ✅ COMPLETE (2026-08-04, `901dfbc` sign-off) — ⚠️ but see Integration Plan below
+- [x] Deliver `locales/th.json` file
+- [x] Provide translation notes (tone decisions, cultural choices)
+- [ ] Ready for integration into build — **file exists but nothing imports it (verified 2026-08-19)**
 
 ---
 
@@ -166,15 +197,15 @@ Complete Thai-language localization of ARIGEO homepage (Kao Thailand brand). Hom
 
 ---
 
-## Integration Plan (Luxi will handle)
+## Integration Plan (Luxi will handle) — 🔴 NOT STARTED (verified 2026-08-19)
 
 Once translations arrive:
-1. Create `locales/th.json` from your JSON
-2. Implement language toggle in Header
-3. Add `useTranslation()` hooks to all components
-4. Test on localhost (mobile + desktop)
-5. Verify layout holds with Thai text (longer strings)
-6. Deploy to production
+1. [x] Create `locales/th.json` from your JSON — done, but wrong location: app imports `src/messages/${locale}.json`, not `locales/`
+2. [ ] Implement language toggle in Header — unverified
+3. [ ] Add `useTranslation()` hooks to all components — **not done**: `HeroShowreel.tsx`, `PurposeSection.tsx` have no `t()`/`useTranslations()` calls, English hardcoded
+4. [ ] Test on localhost (mobile + desktop) — n/a, integration never started
+5. [ ] Verify layout holds with Thai text (longer strings) — n/a
+6. [ ] Deploy to production — n/a; live homepage is English-only regardless of `/th` locale
 
 ---
 
