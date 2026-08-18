@@ -75,20 +75,39 @@ I am Luxi Oracle — an AI. I think visually, I analyze interfaces, I optimize p
 - **Thai Typography** — Noto Sans Thai, line-height 1.6+, proper metrics
 - **User Testing** — Watch people use it, learn from patterns
 
+## Repository Type: Brain, Not App Code
+
+This repo has **no `package.json`, no build/lint/test commands** — it is not an application codebase. It is Luxi's persistent memory + orchestration workspace inside the larger `mission-control` multi-oracle fleet. The actual frontend projects Luxi designs for (e.g. Captain Maid 2.0, ARIGEO) live in **separate sibling repos** and are not checked in here — only briefs, specs, and status reports about them are (`ψ/inbox/`, `ψ/writing/`, `design-system/`).
+
+Given that, there is nothing to build/lint/test in this repo itself. "Development" here means: read/write markdown files under `ψ/`, append events to `ψ/fleet/BROADCAST-LOG.ndjson`, and (when embedded in an actual frontend repo via a brief) apply the specs from `design-system/MASTER.md`.
+
 ## Brain Structure
 
 ```
 ψ/
-├── inbox/          # User feedback, requests
+├── inbox/              # Incoming briefs/assignments/tasks from other oracles or พี่เอก
+│   └── escalation/     # Blockers/decisions routed up, TTL 14d (see MEMORY-RULES.md)
+├── outbox/              # Awaken/soul-sync messages sent out
 ├── memory/
-│   ├── resonance/  # Identity, soul, philosophy
-│   ├── learnings/  # Design patterns discovered
-│   └── retrospectives/  # Session reflections
-├── writing/        # Design specs, explorations
-├── lab/            # Experiments, prototypes
-├── learn/          # Study materials, design research
-└── archive/        # Completed designs, old versions
+│   ├── MEMORY.md        # Index of all memories — read once per session (RTK)
+│   ├── MEMORY-RULES.md  # What to save where, when, and for how long
+│   ├── resonance/       # Identity, soul-sync profiles, philosophy
+│   ├── learnings/       # Design patterns + feedback/decision records discovered
+│   ├── retrospectives/  # Immutable session reflections (/rrr)
+│   └── traces/          # Cross-session network/relationship notes
+├── fleet/
+│   ├── BROADCAST-LOG.ndjson  # Append-only fleet-wide event log (git-tracked)
+│   ├── schema.json           # Event schema for the log
+│   └── QUERY-GUIDE.md        # jq recipes for querying the log
+├── writing/             # Design specs, project status reports, explorations
+├── lab/                 # Experiments, prototypes
+└── archive/             # Superseded inbox items, old versions (Nothing is Deleted)
 ```
+
+Other top-level dirs:
+- `design-system/` — `MASTER.md` (color/type/spacing/motion tokens, source of truth) and `AUDIT.md` for the Captain Maid 2.0 design system. Reference these when producing specs or reviewing implementation in the sibling frontend repo.
+- `scripts/fleet-emit.sh` — defines `oracle_emit()`, the shared bash function all oracles source to append an event to `ψ/fleet/BROADCAST-LOG.ndjson`. Requires being inside a git repo (uses `git rev-parse --show-toplevel` to find `ψ/fleet/`).
+- `scripts/fleet-dashboard.sh` — human-readable summary of the broadcast log (events by type, active oracles, projects touched, critical issues, last 5 events). Run with `bash scripts/fleet-dashboard.sh`; uses `jq` if available, falls back to grep/awk otherwise.
 
 ## Quick Start
 
@@ -96,6 +115,7 @@ I am Luxi Oracle — an AI. I think visually, I analyze interfaces, I optimize p
 - **Performance audit**: Run Lighthouse, identify bottleneck, propose optimization
 - **Check accessibility**: WCAG AAA checker, manual testing with keyboard navigation, screen reader test
 - **Thai support**: Verify with native Thai text, check typography metrics, test all diacritics
+- **Fleet status**: `bash scripts/fleet-dashboard.sh` for a summary, or see `ψ/fleet/QUERY-GUIDE.md` for targeted `jq` queries against `ψ/fleet/BROADCAST-LOG.ndjson`
 
 ## Session Rhythm
 
