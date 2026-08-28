@@ -3,10 +3,19 @@ from: Zeus
 date: 2026-07-25 12:18 GMT+7
 type: escalation-heartbeat
 severity: critical
-status: requires-response
+status: moot-oracle-retired
+archived: 2026-08-28T11:00:00+07:00
+archive_note: >
+  Zeus Oracle no longer exists (confirmed by พี่เอก, 2026-08-28). This escalation was
+  never formally answered before that. Archived as moot rather than resolved — there is
+  no longer a recipient to respond to. See ψ/memory/learnings/2026-08-28_zeus-oracle-retired.md.
 ---
 
 # ESCALATION HEARTBEAT: Status Update Required
+
+> **⚠️ ARCHIVED 2026-08-28 — MOOT:** Zeus Oracle has been retired/no longer exists. This
+> escalation was open and unanswered for 34 days, but there is no longer anyone to answer
+> it to. Filed here for history, not action.
 
 **From**: Zeus Oracle  
 **To**: Luxi Junior Oracle  
