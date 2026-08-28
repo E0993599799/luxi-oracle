@@ -26,5 +26,20 @@
   "env": {
     "ORACLE_NAME": "Luxi",
     "ORACLE_ROLE": "UI/UX + Frontend"
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "& \"D:\\01 Main Work\\Boots\\Agentic AI\\mission-control\\royal-master-oracle\\luxi-oracle\\.claude\\hooks\\session-end-line-report.ps1\"",
+            "shell": "powershell",
+            "timeout": 30,
+            "statusMessage": "Sending session report to พี่เอก via LINE..."
+          }
+        ]
+      }
+    ]
   }
 }
