@@ -33,3 +33,25 @@ Rule (parent CLAUDE.md §"Self-Evaluation Loop"): same friction 3 sessions → f
 | 2026-08-03 02:22 | c2e0ce4d | Phase 1 complete (6/6), Phase 2 complete (6/6), 9 commits deployed | khun-ram Thai translations (expected, not blocking) | ARIGEO 7.1→9.2/10 production ready, dark mode + language switcher shipped | Vercel build loops (30-45s/cycle) | i18n architecture mismatch (server/client) | partial Thai deployment confused status | Integrated 2/6 Thai translations mid-session instead of all-or-nothing approach |
 | 2026-08-09 12:11 | unknown | captain-maid: icon modernization (30+ icons), TipCard refactored (emoji→LucideIcon), mission completed (MISSION_COMPLETE_2026-08-09.md + .registry), 4 commits | n/a | All 6 pages modernized with lucide icons, 4 deployments READY, zero regressions | Lucide-react brand icon assumptions (3x deploy failures), local verification skipped | Assumed Facebook/Instagram/Twitter/Youtube exist in lucide-react; discovered via failed deployments instead of docs |
 | 2026-08-19 06:00 | 368876a5 | /init audit of luxi-oracle repo, corrected CLAUDE.md (Repository Type section, fixed ψ/ diagram, documented scripts/design-system), committed + pushed ddf8aec | n/a | Found and fixed stale/missing repo docs (no package.json, ψ/fleet + scripts/ were undocumented) | Bash tool silently exit-1 on Windows spaced paths (switched to PowerShell); PowerShell Get-Date rejects bash date format strings | nearly under-researched (skipped reading scripts/design-system fully) before writing CLAUDE.md edit — caught before writing, no bad output shipped |
+| 2026-08-28 16:49 | 152f5e6e | cms-arigeo pagebuilder-v2 spec (2 drafts, corrected against real repo read), approved + handed to ธาม; save-as-template feature implemented, PR #36 opened | Faceted Product Filter block (spec §4) deferred pending ธาม sign-off; local main bc8fe1d cleanup pending พี่เอก decision | Corrected spec via real repo read before shipping wrong guesses; caught 193-commit stale checkout before merging bad code, recovered cleanly via isolated worktree | Chrome automation timeouts/hangs (screenshot/scroll/video), Windows Git Bash cd/PATH/ln-s failures, cms-arigeo mixed unrelated-uncommitted + stale-main state | implemented against local cms-arigeo checkout without git-fetch/staleness check first — discovered 193 commits behind only while preparing the PR, not before writing code (same theme as 2026-08-02s "skipped pre-flight fetch check") |
+
+## 🔁 Recurring Pattern Detected (2026-08-28)
+
+"Acted on unverified assumed state instead of checking first" appeared again — 2026-08-28's error
+("implemented against local cms-arigeo checkout without a git-fetch/staleness check first")
+is the same theme as 2026-08-02's ("assumed git status up to date = safe to push; skipped
+pre-flight fetch check"), and part of the broader "assume instead of verify" family already
+flagged at the 2026-08-01/02/03 window below (which itself noted "reached ≥3 threshold (now 6/8)"
+and was escalated as a decision pattern, not a tool failure).
+
+**This is not a new pattern — it is the same pattern, still unresolved after a prior escalation.**
+The 2026-08-19 row shows one clean catch (under-research caught before writing, no bad output
+shipped) — proof the discipline is possible — but 2026-08-28 shows real cost paid anyway: a
+feature was implemented and locally committed against 193-commits-stale source before the
+staleness was discovered, and had to be rebuilt from scratch in a worktree.
+
+**Suggested action, concretely this time**: a literal pre-implementation checklist step —
+`git fetch && git log <local>..<remote> --oneline | head -1` (or equivalent) — run and its output
+checked, before writing the first line of any change in a repo not actively maintained every
+session. Not "remember to verify" (already tried, per the 2026-08-09 note, and didn't stick) —
+make it a mechanical first command, every time, in this class of task.
