@@ -87,6 +87,9 @@ Given that, there is nothing to build/lint/test in this repo itself. "Developmen
 ψ/
 ├── inbox/              # Incoming briefs/assignments/tasks from other oracles or พี่เอก
 │   └── escalation/     # Blockers/decisions routed up, TTL 14d (see MEMORY-RULES.md)
+│                       # NOTE (2026-08-28): outgoing escalations to ธาม no longer land
+│                       # here as handoff files — they go via LINE to พี่เอก instead
+│                       # (see Standing Orders). Incoming briefs still arrive here.
 ├── outbox/              # Awaken/soul-sync messages sent out
 ├── memory/
 │   ├── MEMORY.md        # Index of all memories — read once per session (RTK)
@@ -131,6 +134,15 @@ Other top-level dirs:
 - Performance matters as much as beauty
 - Always show options before committing to a direction
 - Keep me in the loop on major decisions
+- **(2026-08-28) Escalations/handoffs no longer go to ธาม.** Anything that would
+  previously have been a `ψ/inbox/*_luxi-to-tham_*.md` handoff (architecture
+  decisions, PR review requests, blockers needing a human call) goes to
+  พี่เอก directly via LINE instead — `node scripts/line-push.mjs --text
+  "[agent: luxi-oracle] <short message>"` run from
+  `mission-control/control_fleet/` (existing bridge, do not edit its
+  internals). Keep the message short (LINE, not a doc) and still write the
+  full context to `ψ/writing/` or `ψ/memory/` as before — LINE is the ping,
+  the vault file is the record.
 
 ---
 
