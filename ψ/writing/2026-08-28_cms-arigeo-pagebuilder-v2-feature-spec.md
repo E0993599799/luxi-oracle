@@ -251,3 +251,141 @@ Most of the previous draft's open questions are now answered (§1). What's left:
   was never a button, just a label. Confirmed by reading the component, not guessing.
 - I did **not** touch navigation/sidebar — that's ธาม's live, unresolved call — and did not delete
   or modify `template-repo.ts` despite confirming it's dead code; that's a call for its owner.
+
+---
+
+## 7. Addendum (2026-08-29) — §3 shipped, §5 Q3/Q4 resolved
+
+Re-checked against the live `cms-arigeo` repo the day after this spec was approved. Two things
+changed on the ground:
+
+**§3 "Save current page as template" is done.** Commit `bc8fe1d` (2026-08-28 13:29, 29 minutes
+after พี่เอก's approval, authored by พี่เอก via a separate Claude session) shipped exactly the
+proposed shape: `saveCurrentPageAsTemplateAction` in `templates/actions.ts`, a
+`SaveAsTemplateDialog`, and a "Save as template" button wired into `editor/Shell.tsx`'s top bar
+(between preview toggles and Save/Publish). §5 Q3 (where should the button live) is moot — it
+already landed in the top bar, not `BottomBar.tsx`. **Remaining work on cms-arigeo's side: zero.**
+Also note — the `ψ/inbox/*_luxi-to-tham_*.md` handoff for this spec was written under the routing
+convention in place *before* พี่เอก's 2026-08-28 standing-order change (escalations now go via LINE,
+not ธาม-handoff files); it never actually reached ธาม, and by the time it would have, the gap it
+described was already closed. No resend needed for §3.
+
+**§5 Q4 (reusable facet pattern) — confirmed yes, reuse it.** `binding/fieldMap.ts` already
+provides a curated, closed field registry per collection (`COLLECTION_META`, `fieldOptionsFor()`,
+`ALL_FIELD_OPTIONS`) — for `products` it lists exactly `brand` / `category` / `productType` /
+`freeFrom`, matching the corrected facet set in §4.3. `binding/query-types.ts`'s `ALLOWED_OPERATORS`
+includes `in`/`not_in`, which is what a `multiSelect` facet on `freeFrom` needs. And
+`binding/client.ts`'s `useCmsQuery(req)` is a `'use client'` hook (`useEffect`-driven, re-fetches
+whenever `req` changes) already used by `ProductQuery.tsx` and friends — so a visitor-facing
+`ProductFilterBlock` doesn't need new query infrastructure at all: hold selected facet values in
+local `useState`, build a `CmsQueryRequest` from them each render, and pass it straight to the
+existing `useCmsQuery`. The only genuinely new work for §4 is the facet-row UI itself (add/reorder
+facet config in the editor, render the interactive controls on the public page) — every layer under
+it (field registry, operators, reactive querying) is already there and reusable as-is.
+
+**Net effect**: this spec is down to one remaining build item — the Faceted Product Filter block
+(§4) — with its data layer now fully de-risked. §5 Q1 (scent/size/price schema addition) and Q2
+(delete dead `template-repo.ts`) are still open, unrelated to code work.
+
+---
+
+## 8. §4 implementation scoping (2026-08-29) — layout + state decided, ready to build
+
+Additional verification against the real repo, plus two decisions from พี่เอก, close out §4's
+remaining design questions.
+
+### 8.1 New finding: facet *options* are free too, not just facet *filtering*
+
+`brands` and `product-categories` are each their own entries in `ALLOWED_COLLECTIONS`
+(`binding/query-types.ts`) — independently queryable through `useCmsQuery`, not just filterable
+fields on `products`. `query.ts`'s `queryCms()` confirms this at the server layer (any allowed
+collection, not just `products`, goes through the same validated `payload.find`).
+
+This means a `category`/`brand` facet doesn't need a new lookup endpoint to populate its pills —
+it queries `brands`/`product-categories` directly for the live list of values, the same way it
+queries `products` for results. Combined with the §7 addendum's finding, **§4 now requires zero
+new backend work of any kind** — every layer (field registry, distinct-value lookups, operators,
+reactive querying) already exists and is reusable as-is.
+
+### 8.2 Decisions (พี่เอก, 2026-08-29)
+
+- **Layout: sidebar** (INFOLOX's pattern), not a top filter bar. Facet rows stack vertically
+  alongside the product grid, matching the reference demo this whole feature is inspired by.
+- **State: client-only**, no URL query-param sync. Facet selections live in local `useState` and
+  reset on navigation/reload — same pattern `ProductQuery.tsx` already uses, no new state
+  infrastructure. (Bookmarkable/shareable filtered URLs were considered and explicitly declined —
+  not worth the added complexity for a first version.)
+
+### 8.3 Component shape
+
+New 9th dynamic component, same pattern as the other eight:
+
+```
+builder-v2/components/dynamic/ProductFilterBlock.tsx
+```
+
+```ts
+export interface ProductFilterBlockProps {
+  title: string
+  facets: FacetConfig[]        // editor-configured, array field (same pattern as
+                                // ProductQuery's advancedFilters)
+  limit: number
+  sortField: string
+  sortDir: 'asc' | 'desc'
+}
+
+interface FacetConfig {
+  type: 'category' | 'multiSelect' | 'text'
+  sourceField: string          // dropdown, sourced from fieldOptionsFor('products'),
+                                // never free text
+  label: string                // Thai label, e.g. "หมวดหมู่" / "แบรนด์" / "ปราศจาก" / "ประเภทสินค้า"
+}
+```
+
+Buildable facet set unchanged from §4.3: `category`, `brand` (both type `'category'`), `freeFrom`
+(`'multiSelect'`), `productType` (`'text'`/select).
+
+### 8.4 Editor-side (inspector panel)
+
+`facets` uses Puck's `type: 'array'` + `arrayFields`, identical to `ProductQuery.fields.advancedFilters`
+— no new field-control type needed, `inspector/fields/` already covers it. Each row:
+`type` (select, fixed 4-option registry) → `sourceField` (select, options from `fieldOptionsFor('products')`
+filtered to the four allowed facet fields) → `label` (text, editor-authored, Thai-first).
+
+### 8.5 Runtime (visitor-facing render)
+
+`'use client'`. Two query hooks in play:
+
+1. **Facet options** — for each `category`/`brand` facet, `useCmsQuery({ collection: 'brands' | 'product-categories', limit: 100 })` once on mount to populate the pill list. `freeFrom` options are the fixed 5-value enum from the schema (`phosphate | paraben | ammonia | formaldehyde | sls`), no query needed.
+2. **Results** — selected facet values held in local `useState<Record<string, string | string[]>>`, rebuilt into a `CmsFilter[]` each render (same shape `ProductQuery` already builds), passed to `useCmsQuery({ collection: 'products', filters, limit, sortField, sortDir })`.
+
+Layout: sidebar `<aside>` (facet rows, one control per `FacetConfig`) + product grid, reusing
+`_shared.tsx`'s `LoadingState` / `DynamicEmptyState` / `QueryErrorBox` for both the facet-options
+fetch and the results fetch, consistent with every other dynamic component's loading/error states.
+
+Facet controls, WCAG AAA (icon + text, never color alone), Thai-first labels:
+- `category` (category/brand) → pill/chip select, single-select, active pill marked with icon +
+  border + label, not color alone
+- `multiSelect` (freeFrom) → checkboxes with visible label text
+- `text` (productType) → native `<select>` dropdown
+
+### 8.6 Registration
+
+Add to `registry/dynamic.ts`'s `dynamic` / `dynamicFixtures` / `dynamicValidators` records (9th
+entry, `verifyDynamicRegistry()`'s hardcoded count of 8 needs bumping to 9). **Do not edit
+`registry/index.ts` directly** — per that file's own header comment, it's merged by Stream L from
+`registry/dynamic.ts`; this is a coordination point for whoever picks up implementation, not
+something to route around.
+
+### 8.7 Explicitly still out of scope (unchanged from §4.5)
+
+- No freeform "any field is a filter" builder — facet types stay the fixed 3-type registry.
+- Does not migrate captain-maid.com onto Builder V2.
+- Does not add `scent`/`size`/`price` fields to the Products schema (§5 Q1, still open, unrelated).
+
+### 8.8 Status
+
+§4 is now fully scoped — component shape, editor UI, runtime data flow, and layout/state decisions
+are all settled, and every dependency it needs already exists in the codebase. Ready for
+implementation; nothing left to design. §5 Q1 (schema) and Q2 (delete dead `template-repo.ts`)
+remain open, both unrelated to this block's code.
