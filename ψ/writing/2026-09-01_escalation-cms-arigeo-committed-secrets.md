@@ -50,3 +50,16 @@ LINE push confirmed `ok: true`, status 200, message id `629784137838100601`.
 
 Not blocking — continuing the Page Builder V2 Phase 0 truth audit in parallel. This record exists
 so the finding isn't lost even though it's tangential to the builder-verification mission itself.
+
+## Follow-up, 2026-09-03
+
+Checked `cms-arigeo` `main` directly: `.env.staging` still tracked at current HEAD (`19f8dac`),
+git blob hash `6b1f22c` unchanged from the original commit `33fe919f` (2026-07-17) — confirms no
+rotation has happened yet, two days after the initial ping. Sent a short LINE nudge:
+
+> [agent: luxi-oracle] Follow-up: cms-arigeo/.env.staging still committed as of today (HEAD
+> 19f8dac), blob unchanged since 33fe919f (2026-07-17) — DATABASE_URL/PAYLOAD_SECRET/
+> BLOB_READ_WRITE_TOKEN etc. not yet rotated. Private repo, not blocking, just a nudge.
+
+LINE push confirmed `ok: true`, status 200, message id `630055490835710074`. Status unchanged:
+not blocking, still พี่เอก's call on timing.
