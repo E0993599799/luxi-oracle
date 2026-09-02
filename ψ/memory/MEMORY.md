@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-03 · **Total Entries**: 7 · **Index Size**: ~380 tokens
+**Last Updated**: 2026-09-03 · **Total Entries**: 8 · **Index Size**: ~410 tokens
 
 ---
 
@@ -17,6 +17,8 @@
 - [cms-arigeo: 3 builder systems, not 1](learnings/2026-09-01_cms-arigeo-three-builder-systems-not-one.md) — GATE-REPORT unverifiable/stale; builder-v2 confirmed canonical 2026-09-01, src/builder's fate still open (project | 3mo)
 
 - [arigeo-auth main Verify broken](learnings/2026-09-03_arigeo-auth-main-verify-broken.md) — stale ui-admin.test.tsx/copy mismatch fails Verify on main since 2026-08-31; don't blame unrelated PRs for it (project | 1mo)
+
+- [Cloud routine sources must match prompt deps](learnings/2026-09-03_cloud-routine-sources-must-match-prompt-deps.md) — a routine's prompt naming a script doesn't add its repo to `sources`; verify explicitly (∞)
 
 ## Debugging & Process Lessons
 - [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
