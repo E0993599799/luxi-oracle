@@ -55,4 +55,20 @@ staleness was discovered, and had to be rebuilt from scratch in a worktree.
 checked, before writing the first line of any change in a repo not actively maintained every
 session. Not "remember to verify" (already tried, per the 2026-08-09 note, and didn't stick) —
 make it a mechanical first command, every time, in this class of task.
+
+**Partial resolution (2026-09-03, via khun-oracle)**: the same "assume instead of verify"
+family showed up independently in khun-oracle (3/7 sessions: `git init` w/o checking for an
+existing remote, wrong-branch checkout, missing `git status` at session start), was raised
+at standup, and root-caused into a global fix — `~/.claude/RTK.md` now carries a mandatory
+"Session Start Protocol" requiring `git status --short` + `git branch --show-current` as
+the unconditional first action of every session, everywhere (loaded via
+`~/.claude/CLAUDE.md`'s `@RTK.md` import, so it applies here too without editing this
+repo's own CLAUDE.md).
+
+This closes the **git-state slice** of this pattern specifically — the exact mechanical
+check the 2026-08-28 note above asked for, now enforced fleet-wide rather than left to
+memory. It does **not** close the broader pattern: the non-git instances above (wrong site
+assumed, library API assumed, config assumed to exist/not-exist) are a different root cause
+(domain-fact verification, not repo-state verification) and remain open. Don't count this
+row's family as fully resolved on the strength of the git-state fix alone.
 | 2026-09-01 03:32 | c8059930 | arigeo-auth portal visual match + trust-strip 2x icons (PR #19 merged, PR #20 open); cross-repo UI/UX+perf/SEO audit published (26 findings, 5 codebases) | login-stuck bug diagnosed (OIDC env vars) not confirmed fixed; PR #20 merge status unconfirmed | 3-repo parallel Agent-fork audit landed as one Artifact, matched portal visuals to reference screenshot cleanly | npm ci timed out all session (no sandbox network), no local build verification possible | let OIDC bug diagnosis evaporate into chat instead of writing it to a durable file when user deprioritized it |
