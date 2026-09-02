@@ -55,3 +55,4 @@ staleness was discovered, and had to be rebuilt from scratch in a worktree.
 checked, before writing the first line of any change in a repo not actively maintained every
 session. Not "remember to verify" (already tried, per the 2026-08-09 note, and didn't stick) —
 make it a mechanical first command, every time, in this class of task.
+| 2026-09-01 03:32 | c8059930 | arigeo-auth portal visual match + trust-strip 2x icons (PR #19 merged, PR #20 open); cross-repo UI/UX+perf/SEO audit published (26 findings, 5 codebases) | login-stuck bug diagnosed (OIDC env vars) not confirmed fixed; PR #20 merge status unconfirmed | 3-repo parallel Agent-fork audit landed as one Artifact, matched portal visuals to reference screenshot cleanly | npm ci timed out all session (no sandbox network), no local build verification possible | let OIDC bug diagnosis evaporate into chat instead of writing it to a durable file when user deprioritized it |

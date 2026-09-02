@@ -24,3 +24,6 @@ out/
 
 # Fleet status broadcast utilities (tracked)
 !/scripts/fleet-*.sh
+
+# /learn — origin symlinks point outside the repo (ghq cache), docs stay tracked
+ψ/learn/**/origin
