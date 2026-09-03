@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-03 · **Total Entries**: 8 · **Index Size**: ~410 tokens
+**Last Updated**: 2026-09-03 · **Total Entries**: 9 · **Index Size**: ~440 tokens
 
 ---
 
@@ -19,6 +19,8 @@
 - [arigeo-auth main Verify broken](learnings/2026-09-03_arigeo-auth-main-verify-broken.md) — stale ui-admin.test.tsx/copy mismatch fails Verify on main since 2026-08-31; don't blame unrelated PRs for it (project | 1mo)
 
 - [Cloud routine sources must match prompt deps](learnings/2026-09-03_cloud-routine-sources-must-match-prompt-deps.md) — a routine's prompt naming a script doesn't add its repo to `sources`; verify explicitly (∞)
+
+- [Pending cms-arigeo routine check-in](learnings/2026-09-03_pending-cms-arigeo-routine-checkin.md) — verify trig_01LoStxhkXGDbE7smHHnSfP1 ran cleanly after 2026-09-04 09:00 (project | 7d)
 
 ## Debugging & Process Lessons
 - [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
