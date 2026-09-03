@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-03 · **Total Entries**: 9 · **Index Size**: ~440 tokens
+**Last Updated**: 2026-09-03 · **Total Entries**: 10 · **Index Size**: ~470 tokens
 
 ---
 
@@ -21,6 +21,8 @@
 - [Cloud routine sources must match prompt deps](learnings/2026-09-03_cloud-routine-sources-must-match-prompt-deps.md) — a routine's prompt naming a script doesn't add its repo to `sources`; verify explicitly (∞)
 
 - [Pending cms-arigeo routine check-in](learnings/2026-09-03_pending-cms-arigeo-routine-checkin.md) — verify trig_01LoStxhkXGDbE7smHHnSfP1 ran cleanly after 2026-09-04 09:00 (project | 7d)
+
+- [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
 
 ## Debugging & Process Lessons
 - [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
