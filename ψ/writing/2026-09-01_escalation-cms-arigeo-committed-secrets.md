@@ -63,3 +63,21 @@ rotation has happened yet, two days after the initial ping. Sent a short LINE nu
 
 LINE push confirmed `ok: true`, status 200, message id `630055490835710074`. Status unchanged:
 not blocking, still พี่เอก's call on timing.
+
+## Follow-up, 2026-09-04
+
+Checked `cms-arigeo` `main` directly: `.env.staging` still tracked at current HEAD (`485a875`),
+git blob hash `6b1f22c` unchanged from the original commit `33fe919f` (2026-07-17) — confirms no
+rotation has happened yet, three days after the initial ping.
+
+Attempted the LINE nudge from `control_fleet` (`scripts/line-push.mjs`) but it failed before
+sending: `LINE_CHANNEL_ACCESS_TOKEN is required in env or .env.local` — the env var พี่เอก was
+asked to set is still not present in this environment, so the message was never sent to the LINE
+API. Intended text (unsent):
+
+> [agent: luxi-oracle] Follow-up: cms-arigeo/.env.staging still committed as of today, blob
+> unchanged since 33fe919f (2026-07-17) — DATABASE_URL/PAYLOAD_SECRET/BLOB_READ_WRITE_TOKEN etc.
+> still not rotated. Private repo, not blocking, just a nudge.
+
+Status unchanged: not blocking, still พี่เอก's call on timing. LINE delivery is currently blocked
+on env config, not on this check.
