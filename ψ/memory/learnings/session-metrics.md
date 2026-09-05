@@ -74,3 +74,22 @@ row's family as fully resolved on the strength of the git-state fix alone.
 | 2026-09-01 03:32 | c8059930 | arigeo-auth portal visual match + trust-strip 2x icons (PR #19 merged, PR #20 open); cross-repo UI/UX+perf/SEO audit published (26 findings, 5 codebases) | login-stuck bug diagnosed (OIDC env vars) not confirmed fixed; PR #20 merge status unconfirmed | 3-repo parallel Agent-fork audit landed as one Artifact, matched portal visuals to reference screenshot cleanly | npm ci timed out all session (no sandbox network), no local build verification possible | let OIDC bug diagnosis evaporate into chat instead of writing it to a durable file when user deprioritized it |
 | 2026-09-03 01:52 | b21c35ac | committed pending memory backlog; triaged+merged arigeo-auth PR #20 (proved CI failure pre-existing on main); re-checked+nudged cms-arigeo secret rotation (still unrotated); created cloud routine for tomorrow's follow-up check; confirmed agis/omega/ram never responded to wake-up nudge (archived 2026-08-28) | wake-up-check-agis-omega-ram routine deletion (no API support, user doing it manually) | diffed PR #20's red CI check against main's own run history to prove it was pre-existing, not a regression, before merging | rtk find rejects compound predicates (-o, \( \)), needed rtk proxy fallback twice; /rrr session-ID sed pattern didn't strip spaces in oracle root path | first cloud-routine draft omitted control_fleet as a git source despite the prompt depending on a script there — caught 2 messages later via git remote -v, not immediately |
 | 2026-09-03 12:40 | b21c35ac | noted pending cloud-routine check-in in memory, committed+pushed (01ba158); confirmed clean wrap-up status; second /rrr on same session's tail (~11 active min across ~10h39m wall-clock, two multi-hour idle gaps) | n/a | correctly caught and corrected an inflated "~11 hour" duration claim before it shipped in this retro's own header | full default /rrr flow (incl. 2nd background timestamp-miner subagent) is disproportionate overhead for an 11-minute, 6-message tail segment | wrote a full frontmatter'd memory file for a one-off self-expiring reminder that a Next Steps line in the prior retro already covered — reached for the heaviest documented tool by default |
+| 2026-09-05 22:09 | ac947a1e | verified session had zero substantive work (git.jsonl mined to confirm), wrote honest thin retro instead of padding with prior session's commits | n/a | caught and refused an in-progress rationalization (borrowing prior-session commits to fake substance) before it shipped | /rrr skill's own pwd-encoding sed example doesn't collapse spaces, silently produced empty PROJECT_BASE on this WSL /mnt/d/... path (3rd occurrence of this theme: 2026-08-19, 2026-09-03, now) | n/a — no decision error this session, nothing was attempted beyond verification |
+
+## 🔁 Recurring Pattern Detected (2026-09-05)
+
+"Spaced-path handling breaks shell tooling on this WSL `/mnt/d/...` repo" appeared in
+**3 of last 7 sessions** (friction column: 2026-08-19, 2026-09-03 01:52, 2026-09-05):
+- 2026-08-19: Bash tool silently exit-1 on Windows spaced paths, had to switch to PowerShell
+- 2026-09-03: `/rrr`'s session-ID sed pattern didn't strip spaces in the oracle root path
+- 2026-09-05: same sed pattern (`s|^/|-|; s|[/.]|-|g`) again produced an empty `PROJECT_BASE`
+  because it only substitutes `/` and `.`, never spaces — caught by cross-checking
+  `ls -d ~/.claude/projects/*<repo>*` directly instead of trusting the regex
+
+Per parent CLAUDE.md §"Self-Evaluation Loop" — reached ≥3 threshold. This is an
+**operational** pattern (friction column), not a decision error: the fix belongs in the
+`/rrr` skill's own encoding example, not in this repo's memory. Suggested: file/raise that
+the skill's example command (`ENCODED_PWD=$(echo "$ORACLE_ROOT" | sed 's|^/|-|;
+s|[/.]|-|g')`) should also replace spaces (e.g. `sed 's|[/. ]|-|g'` or equivalent), since
+every session run from a space-containing WSL mount path (`/mnt/d/01 Main Work/...`) hits
+this the same way.
