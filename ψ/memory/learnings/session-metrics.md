@@ -93,3 +93,13 @@ the skill's example command (`ENCODED_PWD=$(echo "$ORACLE_ROOT" | sed 's|^/|-|;
 s|[/.]|-|g')`) should also replace spaces (e.g. `sed 's|[/. ]|-|g'` or equivalent), since
 every session run from a space-containing WSL mount path (`/mnt/d/01 Main Work/...`) hits
 this the same way.
+| 2026-09-07 20:48 | cc249519 | verified thin /clear→/rrr session (zero substantive turns); recognized 4th occurrence of spaced-path sed bug, fixed root cause this time — edited ~/.claude/skills/rrr/SKILL.md (4 sites) instead of logging another workaround | n/a | applied a previously-diagnosed, previously-ignored fix instead of re-flagging it a 5th time | recurring-pattern notes have no mechanism to track whether their suggested fix was ever applied | [→ AGENT DECISION] initially reached for the known workaround again before catching that this was past the escalation threshold and switching to fixing the source |
+
+## 🔁 Recurring Pattern Detected (2026-09-07) — RESOLVED
+
+The spaced-path sed bug ([[2026-09-07_fixed-rrr-spaced-path-sed-root-cause]]) recurred a
+4th time (2026-08-19, 2026-09-03, 2026-09-05, 2026-09-07) after already being flagged at
+the ≥3 threshold with a fix on file. Root cause applied this session: `~/.claude/skills/rrr/SKILL.md`
+sed pattern changed from `s|[/.]|-|g` to `s|[/. ]|-|g` at all 4 sites. Should not recur
+again on space-containing paths. If it does, that's a new bug shape (different special
+character), not a continuation of this one.
