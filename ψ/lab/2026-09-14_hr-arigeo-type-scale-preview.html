@@ -1,0 +1,684 @@
+<!-- Companion mockup to ψ/writing/2026-09-14_hr-arigeo-com-live-token-audit.md §7.
+     Published Artifact: https://claude.ai/code/artifact/962f5969-f9bc-4629-847c-f90c1cca975b
+     This repo copy is the source-of-record; the Artifact link is the interactive, shareable version. -->
+<title>HR Type Scale</title>
+<meta name="description" content="Side-by-side comparison of hr.arigeo.com's current vs. proposed responsive type scale, built from the site's own live design tokens.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --page-bg: #f5f6fa;
+    --page-surface: #ffffff;
+    --page-surface-2: #eef0f6;
+    --page-ink: #1c2030;
+    --page-muted: #656d82;
+    --page-accent: #38539a;
+    --page-accent-tint: #eef1ff;
+    --page-line: #e1e4ee;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+    --thai: 'Noto Sans Thai', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page-bg: #12141c;
+      --page-surface: #191c27;
+      --page-surface-2: #20242f;
+      --page-ink: #e8eaf2;
+      --page-muted: #9aa1b8;
+      --page-accent: #8fa7e8;
+      --page-accent-tint: #232a45;
+      --page-line: #2b3040;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page-bg: #12141c;
+    --page-surface: #191c27;
+    --page-surface-2: #20242f;
+    --page-ink: #e8eaf2;
+    --page-muted: #9aa1b8;
+    --page-accent: #8fa7e8;
+    --page-accent-tint: #232a45;
+    --page-line: #2b3040;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--page-ink);
+    font-family: var(--thai);
+    padding: 28px 20px 56px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  /* ---- Header ---- */
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    text-wrap: balance;
+    max-width: 46ch;
+  }
+  header p {
+    color: var(--page-muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 62ch;
+    margin: 0;
+  }
+  header code {
+    font-family: var(--mono);
+    font-size: .92em;
+    background: var(--page-surface-2);
+    padding: .1em .4em;
+    border-radius: 4px;
+  }
+
+  /* ---- Viewport simulator control ---- */
+  .simulator {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--page-surface);
+    border: 1px solid var(--page-line);
+    border-radius: 12px;
+    padding: 14px 18px;
+    flex-wrap: wrap;
+  }
+  .simulator label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--page-ink);
+    white-space: nowrap;
+  }
+  .simulator input[type="range"] {
+    flex: 1 1 220px;
+    accent-color: var(--page-accent);
+    min-width: 160px;
+  }
+  .simulator .readout {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--page-accent);
+    background: var(--page-accent-tint);
+    border-radius: 999px;
+    padding: 4px 12px;
+    min-width: 92px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .theme-toggle {
+    display: inline-flex;
+    background: var(--page-surface-2);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .theme-toggle button {
+    font-family: var(--thai);
+    font-size: 12.5px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--page-muted);
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .theme-toggle button.active {
+    background: var(--page-surface);
+    color: var(--page-ink);
+    box-shadow: 0 1px 2px rgba(20,20,30,.08);
+  }
+  .theme-toggle button:focus-visible { outline: 2px solid var(--page-accent); outline-offset: 1px; }
+
+  /* ---- Comparison columns ---- */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 24px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  .col-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .col-label .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--tag-color, var(--page-muted));
+    flex: none;
+  }
+  .col-label .name {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .col-label .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--tag-color, var(--page-muted));
+    background: color-mix(in srgb, var(--tag-color, var(--page-muted)) 14%, transparent);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+  .col-current .col-label { --tag-color: #9c6b12; }
+  .col-proposed .col-label { --tag-color: #107f47; }
+
+  /* ---- Device frame: represents hr.arigeo.com's own light-theme UI, fixed regardless of viewer theme ---- */
+  .frame-shell {
+    background: var(--page-surface);
+    border: 1px solid var(--page-line);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(20,20,30,.04);
+  }
+  .frame-chrome {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px 10px;
+  }
+  .frame-chrome .traffic { width: 8px; height: 8px; border-radius: 50%; background: var(--page-line); }
+  .frame-url {
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--page-muted);
+    background: var(--page-surface-2);
+    border-radius: 999px;
+    padding: 3px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* hr.arigeo.com's own light-theme tokens, read directly from its live :root{} block */
+  .device {
+    --hr-bg: #fafafa; --hr-surface: #ffffff; --hr-surface-2: #f4f4f4;
+    --hr-line: rgba(44,44,44,.10); --hr-line-strong: rgba(44,44,44,.18);
+    --hr-muted: #5f5f5f; --hr-text: #2c2c2c;
+    --hr-brand: #38539a; --hr-brand-dark: #263c77; --hr-brand-bright: #4a6ac2; --hr-brand-tint: #f1f2ff;
+    --hr-success: #107f47; --hr-success-tint: #e8f5ee;
+    --hr-amber: #9c6b12; --hr-amber-tint: #faf3e3;
+    --hr-red: #c62828; --hr-red-tint: #fdeeee;
+    --hr-teal: #0b6e78; --hr-teal-tint: #e7f4f5;
+    --hr-sidebar-bg: #1d2c55; --hr-sidebar-bg-2: #263c77;
+    --hr-sidebar-text: #aab4d4; --hr-sidebar-text-hover: #ffffff; --hr-sidebar-line: rgba(255,255,255,.08);
+    --hr-sidebar-accent: #8fa7e8;
+    --hr-shadow-sm: 0 1px 2px rgba(44,44,44,.05);
+    --hr-shadow: 0 1px 3px rgba(44,44,44,.06), 0 6px 20px rgba(44,44,44,.06);
+
+    width: var(--viewport-w, 1160px);
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    background: var(--hr-bg);
+    color: var(--hr-text);
+    transition: width 160ms cubic-bezier(.4,0,.2,1),
+                background 160ms cubic-bezier(.4,0,.2,1),
+                color 160ms cubic-bezier(.4,0,.2,1);
+    font-family: var(--thai);
+  }
+
+  /* hr.arigeo.com's own dark-theme tokens, read directly from its live [data-theme=dark]{} block */
+  .device[data-mockup-theme="dark"] {
+    --hr-bg: #101422; --hr-surface: #1a2032; --hr-surface-2: #222941;
+    --hr-line: rgba(255,255,255,.10); --hr-line-strong: rgba(255,255,255,.20);
+    --hr-muted: #9aa3bd; --hr-text: #e8ebf5;
+    --hr-brand: #7c96e0; --hr-brand-dark: #5b76c4; --hr-brand-bright: #93aaf0; --hr-brand-tint: rgba(124,150,224,.14);
+    --hr-success: #4ec98a; --hr-success-tint: rgba(78,201,138,.14);
+    --hr-amber: #e0b25c; --hr-amber-tint: rgba(224,178,92,.14);
+    --hr-red: #ef7070; --hr-red-tint: rgba(239,112,112,.14);
+    --hr-teal: #55c0cb; --hr-teal-tint: rgba(85,192,203,.14);
+    --hr-sidebar-bg: #0c101c; --hr-sidebar-bg-2: #1a2032;
+    --hr-sidebar-text: #8e97b5; --hr-sidebar-text-hover: #fff; --hr-sidebar-line: rgba(255,255,255,.08);
+    --hr-sidebar-accent: #93aaf0;
+    --hr-shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --hr-shadow: 0 1px 3px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+  }
+
+  /* --- hr.arigeo.com sidebar, real tokens --- */
+  .hr-sidebar {
+    flex: none;
+    width: 168px;
+    background: linear-gradient(180deg, var(--hr-sidebar-bg), var(--hr-sidebar-bg-2));
+    padding: 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-logo {
+    color: var(--hr-sidebar-text-hover);
+    font-weight: 800;
+    font-size: var(--s-h4);
+    letter-spacing: .01em;
+    margin: 0 6px 16px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-logo b { color: var(--hr-sidebar-accent); }
+  .hr-nav a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--hr-sidebar-text);
+    font-size: var(--s-label);
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 2px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-nav a.active { background: rgba(255,255,255,.1); color: var(--hr-sidebar-text-hover); }
+
+  .hr-main {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 22px 24px;
+  }
+  .hr-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .hr-h1 {
+    font-size: var(--s-h1);
+    font-weight: 800;
+    color: var(--hr-text);
+    margin: 0;
+    line-height: 1.2;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-greet {
+    font-size: var(--s-body-sm);
+    color: var(--hr-muted);
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+
+  .hr-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .hr-stat {
+    background: var(--hr-surface);
+    border: 1px solid var(--hr-line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: background 160ms cubic-bezier(.4,0,.2,1), border-color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-stat .k {
+    font-size: var(--s-label);
+    color: var(--hr-muted);
+    font-weight: 600;
+    margin: 0 0 4px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-stat .v {
+    font-size: var(--s-h3);
+    font-weight: 800;
+    color: var(--hr-text);
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+
+  .hr-card {
+    background: var(--hr-surface);
+    border: 1px solid var(--hr-line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    transition: background 160ms cubic-bezier(.4,0,.2,1), border-color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-card h3 {
+    font-size: var(--s-h4);
+    font-weight: 700;
+    color: var(--hr-text);
+    margin: 0 0 10px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-table { width: 100%; border-collapse: collapse; }
+  .hr-table th {
+    text-align: left;
+    font-size: var(--s-label);
+    font-weight: 600;
+    color: var(--hr-muted);
+    padding: 0 8px 8px 0;
+    border-bottom: 1px solid var(--hr-line);
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-table td {
+    font-size: var(--s-body-sm);
+    padding: 8px 8px 8px 0;
+    border-bottom: 1px solid var(--hr-line);
+    color: var(--hr-text);
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-table tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block;
+    font-size: var(--s-label);
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 999px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .badge.pending, .badge.approved, .badge.rejected {
+    transition: background 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .badge.pending { background: var(--hr-amber-tint); color: var(--hr-amber); }
+  .badge.approved { background: var(--hr-success-tint); color: var(--hr-success); }
+  .badge.rejected { background: var(--hr-red-tint); color: var(--hr-red); }
+
+  .hr-note {
+    font-size: var(--s-body);
+    line-height: 1.6;
+    color: var(--hr-text);
+    margin: 0;
+    max-width: 62ch;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+  .hr-note-label {
+    font-size: var(--s-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--hr-brand);
+    margin: 0 0 6px;
+    transition: font-size 160ms cubic-bezier(.4,0,.2,1), color 160ms cubic-bezier(.4,0,.2,1);
+  }
+
+  /* current vs proposed token sets */
+  .col-current .device {
+    --s-label:   clamp(10px, 2vw, 11px);
+    --s-body-sm: clamp(12px, 2.5vw, 13.5px);
+    --s-body:    clamp(13px, 2.5vw, 15px);
+    --s-h4:      clamp(15px, 1.6vw, 18px);
+    --s-h3:      clamp(20px, 4vw, 26px);
+  }
+  .col-current .hr-h1 { font-size: clamp(30px, 4.4vw, 44px); }
+
+  .col-proposed .device {
+    --s-label:   clamp(11px, 1.2vw, 12px);
+    --s-body-sm: clamp(13px, 1.3vw, 14px);
+    --s-body:    clamp(15px, 1.4vw, 16px);
+    --s-h4:      clamp(16px, 1.8vw, 20px);
+    --s-h3:      clamp(20px, 2.2vw, 26px);
+  }
+  .col-proposed .hr-h1 { font-size: clamp(30px, 3.6vw, 44px); }
+
+  /* ---- Spec table ---- */
+  .spec {
+    margin-top: 32px;
+    background: var(--page-surface);
+    border: 1px solid var(--page-line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .spec-head {
+    padding: 16px 18px 4px;
+  }
+  .spec-head h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+  .spec-head p {
+    font-size: 12.5px;
+    color: var(--page-muted);
+    margin: 0 0 12px;
+  }
+  .spec-scroll { overflow-x: auto; }
+  table.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 620px;
+  }
+  .spec-table th, .spec-table td {
+    text-align: left;
+    padding: 9px 14px;
+    border-top: 1px solid var(--page-line);
+    white-space: nowrap;
+  }
+  .spec-table th {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--page-muted);
+  }
+  .spec-table td.role { font-weight: 700; }
+  .spec-table td.formula, .spec-table th.formula-col {
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .spec-table td.formula.old { color: #9c6b12; }
+  .spec-table td.formula.new { color: #107f47; }
+  .spec-table td.px {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--page-muted);
+    font-size: 12px;
+  }
+
+  footer.note {
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: var(--page-muted);
+    max-width: 74ch;
+    line-height: 1.6;
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">design review · hr.arigeo.com</p>
+    <h1>Current vs. proposed type scale</h1>
+    <p>
+      Both columns below run the same dashboard markup and hr.arigeo.com's real live tokens
+      (colors, radius, sidebar, spacing) — only the <code>--s-*</code> font-size variables
+      differ. Drag the slider to simulate viewport width; every size is a real CSS
+      <code>clamp()</code>, so watch how the two scales respond differently as the frame
+      narrows.
+    </p>
+    <div class="simulator">
+      <label for="vw">จำลองความกว้างหน้าจอ (simulated viewport)</label>
+      <input type="range" id="vw" min="360" max="1160" value="1160" step="4">
+      <span class="readout" id="vwReadout">1160px</span>
+    </div>
+    <div class="simulator">
+      <label id="themeLabel">Mockup theme — hr.arigeo.com's own light/dark tokens</label>
+      <div class="theme-toggle" role="group" aria-labelledby="themeLabel">
+        <button type="button" id="btnLight" aria-pressed="false">☀ Light</button>
+        <button type="button" id="btnDark" class="active" aria-pressed="true">☾ Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="compare">
+    <div class="col-current">
+      <div class="col-label">
+        <span class="dot"></span>
+        <span class="name">ปัจจุบัน — Current (live)</span>
+        <span class="tag">shipping</span>
+      </div>
+      <div class="frame-shell">
+        <div class="frame-chrome">
+          <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
+          <span class="frame-url">hr.arigeo.com/dashboard</span>
+        </div>
+        <div class="device" id="deviceCurrent"></div>
+      </div>
+    </div>
+
+    <div class="col-proposed">
+      <div class="col-label">
+        <span class="dot"></span>
+        <span class="name">ที่เสนอ — Proposed</span>
+        <span class="tag">draft</span>
+      </div>
+      <div class="frame-shell">
+        <div class="frame-chrome">
+          <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
+          <span class="frame-url">hr.arigeo.com/dashboard</span>
+        </div>
+        <div class="device" id="deviceProposed"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="spec-head">
+      <h2>Scale reference</h2>
+      <p>8 roles, resolved min (narrow viewport) → max (wide viewport). Body is the fix — everything else mostly keeps values already shipping live.</p>
+    </div>
+    <div class="spec-scroll">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th class="formula-col">Current clamp()</th>
+            <th>min → max</th>
+            <th class="formula-col">Proposed clamp()</th>
+            <th>min → max</th>
+          </tr>
+        </thead>
+        <tbody id="specBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="note">
+    Example data only — names, departments, and figures are placeholders for this preview, not real hr.arigeo.com records.
+    Colors, radius, sidebar treatment, and semantic badge colors are hr.arigeo.com's own live tokens, read directly from
+    its actual <code>:root{}</code> and <code>[data-theme=dark]{}</code> CSS blocks — the Light/Dark toggle switches
+    between those two real token sets, not an approximation. See
+    <code>2026-09-14_hr-arigeo-com-live-token-audit.md</code>. Draft, not yet applied to any repository.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var dashboardHTML = function () {
+    return (
+      '<aside class="hr-sidebar">' +
+        '<div class="hr-logo">ARIGEO <b>HR</b></div>' +
+        '<nav class="hr-nav">' +
+          '<a class="active" href="#">แดชบอร์ด</a>' +
+          '<a href="#">พนักงาน</a>' +
+          '<a href="#">คำขอลา</a>' +
+          '<a href="#">เงินเดือน</a>' +
+          '<a href="#">รายงาน</a>' +
+          '<a href="#">ตั้งค่า</a>' +
+        '</nav>' +
+      '</aside>' +
+      '<main class="hr-main">' +
+        '<div class="hr-topline">' +
+          '<h1 class="hr-h1">แดชบอร์ด</h1>' +
+          '<span class="hr-greet">สวัสดี, คุณสมชาย · วันนี้ 14 ก.ย. 2569</span>' +
+        '</div>' +
+        '<div class="hr-stats">' +
+          '<div class="hr-stat"><p class="k">พนักงานทั้งหมด</p><p class="v">248 คน</p></div>' +
+          '<div class="hr-stat"><p class="k">คำขอลารออนุมัติ</p><p class="v">12</p></div>' +
+          '<div class="hr-stat"><p class="k">รอบจ่ายเงินเดือนถัดไป</p><p class="v">30 ก.ย.</p></div>' +
+        '</div>' +
+        '<div class="hr-card">' +
+          '<h3>คำขอลาล่าสุด</h3>' +
+          '<table class="hr-table">' +
+            '<thead><tr><th>ชื่อ</th><th>แผนก</th><th>วันที่</th><th>สถานะ</th></tr></thead>' +
+            '<tbody>' +
+              '<tr><td>สมชาย ใจดี</td><td>ฝ่ายขาย</td><td>12–14 ต.ค.</td><td><span class="badge pending">รออนุมัติ</span></td></tr>' +
+              '<tr><td>วรรณา พงษ์เจริญ</td><td>ฝ่ายบัญชี</td><td>20 ก.ย.</td><td><span class="badge approved">อนุมัติแล้ว</span></td></tr>' +
+              '<tr><td>ธนกร ศรีสุข</td><td>ฝ่าย IT</td><td>5 ต.ค.</td><td><span class="badge rejected">ไม่อนุมัติ</span></td></tr>' +
+            '</tbody>' +
+          '</table>' +
+        '</div>' +
+        '<div class="hr-card">' +
+          '<p class="hr-note-label">นโยบายการลา</p>' +
+          '<p class="hr-note">พนักงานสามารถยื่นคำขอลาล่วงหน้าอย่างน้อย 3 วันทำการผ่านระบบ ARIGEO HR ' +
+          'หัวหน้างานจะได้รับการแจ้งเตือนทันทีเพื่อพิจารณาอนุมัติ และพนักงานจะเห็นสถานะคำขอแบบเรียลไทม์ในหน้าแดชบอร์ดของตนเอง</p>' +
+        '</div>' +
+      '</main>'
+    );
+  };
+
+  document.getElementById('deviceCurrent').innerHTML = dashboardHTML();
+  document.getElementById('deviceProposed').innerHTML = dashboardHTML();
+
+  var slider = document.getElementById('vw');
+  var readout = document.getElementById('vwReadout');
+  var devices = [document.getElementById('deviceCurrent'), document.getElementById('deviceProposed')];
+
+  function applyWidth() {
+    var w = slider.value + 'px';
+    devices.forEach(function (d) { d.style.setProperty('--viewport-w', w); d.style.width = w; });
+    readout.textContent = slider.value + 'px';
+  }
+  slider.addEventListener('input', applyWidth);
+  applyWidth();
+
+  var btnLight = document.getElementById('btnLight');
+  var btnDark = document.getElementById('btnDark');
+  function setMockupTheme(theme) {
+    devices.forEach(function (d) {
+      if (theme === 'dark') { d.setAttribute('data-mockup-theme', 'dark'); }
+      else { d.removeAttribute('data-mockup-theme'); }
+    });
+    btnLight.classList.toggle('active', theme === 'light');
+    btnDark.classList.toggle('active', theme === 'dark');
+    btnLight.setAttribute('aria-pressed', theme === 'light');
+    btnDark.setAttribute('aria-pressed', theme === 'dark');
+  }
+  btnLight.addEventListener('click', function () { setMockupTheme('light'); });
+  btnDark.addEventListener('click', function () { setMockupTheme('dark'); });
+  setMockupTheme('dark');
+
+  var rows = [
+    ['Label',    'clamp(10px, 2vw, 11px)',    '10px → 11px', 'clamp(11px, 1.2vw, 12px)',  '11px → 12px'],
+    ['Body-sm',  'clamp(12px, 2.5vw, 13.5px)','12px → 13.5px','clamp(13px, 1.3vw, 14px)', '13px → 14px'],
+    ['Body',     'clamp(13px, 2.5vw, 15px)',  '13px → 15px', 'clamp(15px, 1.4vw, 16px)',  '15px → 16px'],
+    ['H4',       'clamp(15px, 1.6vw, 18px)',  '15px → 18px', 'clamp(16px, 1.8vw, 20px)',  '16px → 20px'],
+    ['H3',       'clamp(20px, 4vw, 26px)',    '20px → 26px', 'clamp(20px, 2.2vw, 26px)',  '20px → 26px'],
+    ['H2',       'clamp(24px, 3vw, 34px)',    '24px → 34px', 'clamp(24px, 2.8vw, 34px)',  '24px → 34px'],
+    ['H1',       'clamp(30px, 4.4vw, 44px)',  '30px → 44px', 'clamp(30px, 3.6vw, 44px)',  '30px → 44px']
+  ];
+  var body = document.getElementById('specBody');
+  body.innerHTML = rows.map(function (r) {
+    return '<tr>' +
+      '<td class="role">' + r[0] + '</td>' +
+      '<td class="formula old">' + r[1] + '</td>' +
+      '<td class="px">' + r[2] + '</td>' +
+      '<td class="formula new">' + r[3] + '</td>' +
+      '<td class="px">' + r[4] + '</td>' +
+    '</tr>';
+  }).join('');
+})();
+</script>
