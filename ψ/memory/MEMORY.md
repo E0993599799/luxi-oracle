@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-13 · **Total Entries**: 11 · **Index Size**: ~500 tokens
+**Last Updated**: 2026-09-14 · **Total Entries**: 12 · **Index Size**: ~500 tokens
 
 ---
 
@@ -26,6 +26,7 @@
 
 ## Reference
 - [shadcnblocks-admin dropdown+theme patterns](learnings/2026-09-13_shadcnblocks-admin-dropdown-theme-patterns.md) — shadcn kit patterns for cms-arigeo reuse; PLUS: cms.arigeo.com's real admin is stock Payload theme, zero brand-color bleed, toggle unreachable w/o login (reference | ∞)
+- [cms-arigeo orphaned Payload admin theme](learnings/2026-09-14_cms-arigeo-orphaned-payload-admin-theme.md) — 3 unrelated theme systems stacked + a dead 4th (Control Fleet override, reverted 2026-08-02, never cleaned up) (project | 3mo)
 
 ## Debugging & Process Lessons
 - [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
