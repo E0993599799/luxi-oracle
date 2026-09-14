@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-14 · **Total Entries**: 12 · **Index Size**: ~500 tokens
+**Last Updated**: 2026-09-14 · **Total Entries**: 13 · **Index Size**: ~500 tokens
 
 ---
 
@@ -30,6 +30,7 @@
 
 ## Debugging & Process Lessons
 - [Ask for URL before exhaustive search](learnings/2026-07-21_ask-for-url-before-exhaustive-search.md) — Don't guess which app a bug report means; verify local-vs-deployed before diagnosing (∞)
+- [Print/PDF pagination rules](learnings/2026-09-14_print-pdf-pagination-rules.md) — no orphaned headings (natural flow, not forced page-per-heading), tables split with repeating `<thead>`, figures capped under full-page height; use `mupdf` not `pdfjs+canvas` for PDF QA (∞)
 - [Verification-pattern hook installed](learnings/2026-08-18_verification-pattern-hook-installed.md) — Global PreToolUse hook blocks unverified icon/library imports; needs `/hooks` reload to activate (∞)
 
 ---
