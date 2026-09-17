@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-16 · **Total Entries**: 15 · **Index Size**: ~520 tokens
+**Last Updated**: 2026-09-17 · **Total Entries**: 18 · **Index Size**: ~600 tokens
 
 ---
 
@@ -23,6 +23,10 @@
 - [Pending cms-arigeo routine check-in](learnings/2026-09-03_pending-cms-arigeo-routine-checkin.md) — verify trig_01LoStxhkXGDbE7smHHnSfP1 ran cleanly after 2026-09-04 09:00 (project | 7d)
 
 - [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
+
+- [hr.arigeo.com live token audit — OPEN](../writing/2026-09-14_hr-arigeo-com-live-token-audit.md) — dashboard body text caps at 15px (below 16px baseline); navy-blue brand (`#38539a`) conflicts w/ auth.arigeo.com's red — resolve brand color before any visual pass (project | 3mo)
+- [coachhcm.com payroll UI/UX teardown](../writing/2026-09-14_coachhcm-payroll-uiux-research.md) — reference material feeding the hr.arigeo.com audit above; restraint/contrast/type findings, not independently actionable (reference | 3mo)
+- [auth.arigeo.com theme reconciliation — OPEN](../writing/2026-09-14_auth-arigeo-theme-spec.md) — proposed shadcn-naming migration (zero visual change), untouched in repo; dark mode explicitly deferred pending product ask (project | 3mo)
 
 ## Reference
 - [shadcnblocks-admin dropdown+theme patterns](learnings/2026-09-13_shadcnblocks-admin-dropdown-theme-patterns.md) — shadcn kit patterns for cms-arigeo reuse; PLUS: cms.arigeo.com's real admin is stock Payload theme, zero brand-color bleed, toggle unreachable w/o login (reference | ∞)
