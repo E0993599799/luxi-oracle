@@ -20,7 +20,7 @@
 
 - [Cloud routine sources must match prompt deps](learnings/2026-09-03_cloud-routine-sources-must-match-prompt-deps.md) — a routine's prompt naming a script doesn't add its repo to `sources`; verify explicitly (∞)
 
-- [Pending cms-arigeo routine check-in](learnings/2026-09-03_pending-cms-arigeo-routine-checkin.md) — verify trig_01LoStxhkXGDbE7smHHnSfP1 ran cleanly after 2026-09-04 09:00 (project | 7d)
+- [cms-arigeo secrets still unrotated, 63 days](learnings/2026-09-18_cms-arigeo-secrets-still-unrotated-63-days.md) — one-shot routine's follow-up expired 2 weeks ago; re-verified live, still unrotated, fresh LINE nudge sent (project | 30d)
 
 - [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
 

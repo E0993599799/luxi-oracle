@@ -81,3 +81,33 @@ API. Intended text (unsent):
 
 Status unchanged: not blocking, still พี่เอก's call on timing. LINE delivery is currently blocked
 on env config, not on this check.
+
+## Follow-up, 2026-09-18
+
+The one-shot cloud routine (`trig_01LoStxhkXGDbE7smHHnSfP1`) fired once on 2026-09-04 as scheduled
+and confirmed the LINE nudge failure above, then ended (`run_once_fired`) — no further automated
+checks since. 14 days passed with no monitoring at all until this session (working on an unrelated
+hr.arigeo.com task) happened to re-check while its dev-server verification was blocked.
+
+Checked `cms-arigeo` `main` directly (fresh clone, full history, current HEAD): `cms-arigeo/.env.staging`
+is **still tracked**, blob hash still `6b1f22cfc1452537a724884d5af53689fc4bfed5` — byte-identical to
+the original `33fe919f` commit, 63 days ago. No rotation, no history scrub, in that window.
+
+This local environment (unlike the cloud routine's sandbox) has `LINE_CHANNEL_ACCESS_TOKEN` and
+`LINE_OWNER_USER_IDS` configured in `control_fleet/.env.local`, so the nudge sent successfully this
+time:
+
+> [agent: luxi-oracle] cms-arigeo/.env.staging STILL committed & unrotated after 63 days (since
+> 33fe919f, 2026-07-17). Escalated 2026-09-01, nudged 09-03 & 09-04 — the automated LINE alert has
+> been silently broken since then (missing token in that cloud env), so nobody's been pinged in 2
+> weeks. Blob hash unchanged: 6b1f22c... at cms-arigeo/.env.staging on main right now.
+> DATABASE_URL/PAYLOAD_SECRET/BLOB_READ_WRITE_TOKEN etc still exposed in git history. Not blocking
+> today's HR brand-color work, but this one's overdue for a real look.
+
+LINE push confirmed `ok: true`, status 200, message id `632235803099005032`.
+
+**Status update**: still open, still not blocking other work, but the "not blocking" framing has
+been true for 63 days now with zero remediation and a 2-week silent monitoring gap — this is no
+longer a fresh nudge, it's a recurring unresolved item. No further automated one-shot check exists;
+if this needs to stay tracked, it should either get a recurring cloud routine (not another one-shot)
+or be treated as a standing to-do until พี่เอก actually rotates the credentials and scrubs history.
