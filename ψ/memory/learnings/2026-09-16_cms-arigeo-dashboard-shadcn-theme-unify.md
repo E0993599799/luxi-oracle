@@ -55,5 +55,8 @@ Retried, this time closing the exact gap identified above:
 6. Got preview URL `https://cms-arigeo-4556sqdzz-omega-project.vercel.app`. Verified via the build log's "Checkout exact approved ref" step that it built `ca63a51e`, not stale content — the deployment's own `githubCommitSha` metadata field was misleading (stamped from the last CLI-linked commit, not what was actually built), so didn't trust it at face value.
 7. พี่เอก did the real authenticated click-through with SSO — **colors correct this time**.
 8. Marked #121 ready, merged to `main` as `beff915d`.
+9. Dispatched the same `vercel-prebuilt-build`/`-deploy` pair for `ref=main`, `environment=production`. Confirmed via `get_deployment` that the resulting deployment's `alias` includes `cms.arigeo.com`, `target: "production"`, and `githubCommitSha: beff915d` (this time the metadata was accurate, unlike the preview deploy's stale field). พี่เอก independently checked `cms.arigeo.com/dashboard` live — **colors correct in production**.
+
+**Closed.** No lingering risk on this surface — root cause was process (missing verification gate), not code, and the gate is now demonstrated to work.
 
 **New reusable finding for this repo**: `cms-arigeo`'s Vercel git integration is deliberately disabled (`deploymentEnabled: false`) — any future "get me a preview" request here must go through the `vercel-prebuilt-build` → `vercel-prebuilt-deploy` workflow-dispatch pair (`gh workflow run`), not by waiting on an automatic PR build.
