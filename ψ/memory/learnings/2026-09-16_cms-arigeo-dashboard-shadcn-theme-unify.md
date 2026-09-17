@@ -1,6 +1,6 @@
 ---
 name: cms-arigeo-dashboard-shadcn-theme-unify
-description: REVERTED — PR #119 shipped to production then พี่เอก reported it badly broken ("สีเพี้ยนมาก"); reverted via commit 6bed8827, emergency redeploy fired via b5141e61. Root cause not yet established — this session never visually verified the change (blocked by real ZITADEL SSO) before or after either deploy.
+description: RESOLVED 2026-09-17 — PR #119 shipped to production then พี่เอก reported it badly broken ("สีเพี้ยนมาก"); reverted (6bed8827/b5141e61). Retried identical change as PR #121, this time gated on a real Vercel preview + พี่เอก's own authenticated SSO click-through before merge — colors confirmed correct, merged as beff915d.
 metadata:
   type: feedback
   ttl: 3mo
@@ -42,3 +42,18 @@ Response: `git revert --no-edit bcfd3d18` → `6bed8827` (clean, no conflicts). 
 ## How to apply
 
 Before ever touching this theme surface again: get a real screenshot/click-through from a human with SSO access on a PR preview, *before* merging — not "build passed so it's probably fine." The palette-conversion math and cookie-sync pattern here may still be reusable once the actual visual bug is identified, but do not trust them merely because they compiled.
+
+## Resolution — 2026-09-17
+
+Retried, this time closing the exact gap identified above:
+
+1. Found the reverted branch `feat/dashboard-theme-unify` still had commit `ca63a51e` pushed — byte-identical to the reverted `bcfd3d18` (`git diff bcfd3d18 ca63a51e` empty). Nothing had actually changed since the incident; only the missing verification step remained undone.
+2. `gh` wasn't authenticated in-session — พี่เอก ran `gh auth login` themselves.
+3. Opened draft PR `cms-arigeo#121` off that same commit.
+4. **Discovered `vercel.json` has `"git": {"deploymentEnabled": false}`** — this project's git integration never auto-builds PR previews (explains why #113/#114/#116/#118/#119 never got one either). A generic file-upload deploy would've meant reconstructing 853 tracked files by hand — too costly, and wouldn't match the project's real build config.
+5. Found the project's actual intended mechanism: `.github/workflows/vercel-prebuilt-build.yml` (workflow_dispatch, ref+environment inputs) → `vercel-prebuilt-deploy.yml` (workflow_dispatch, build_run_id input). Dispatched both via `gh workflow run` for `ref=feat/dashboard-theme-unify`, `environment=preview`. Build passed all its regression gates (dashboard real-route gate, admin theme regressions, strict production-compatible build) before producing the artifact.
+6. Got preview URL `https://cms-arigeo-4556sqdzz-omega-project.vercel.app`. Verified via the build log's "Checkout exact approved ref" step that it built `ca63a51e`, not stale content — the deployment's own `githubCommitSha` metadata field was misleading (stamped from the last CLI-linked commit, not what was actually built), so didn't trust it at face value.
+7. พี่เอก did the real authenticated click-through with SSO — **colors correct this time**.
+8. Marked #121 ready, merged to `main` as `beff915d`.
+
+**New reusable finding for this repo**: `cms-arigeo`'s Vercel git integration is deliberately disabled (`deploymentEnabled: false`) — any future "get me a preview" request here must go through the `vercel-prebuilt-build` → `vercel-prebuilt-deploy` workflow-dispatch pair (`gh workflow run`), not by waiting on an automatic PR build.
