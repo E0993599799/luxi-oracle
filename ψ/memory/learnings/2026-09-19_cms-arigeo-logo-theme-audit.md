@@ -1,6 +1,6 @@
 ---
 name: cms-arigeo-logo-theme-audit
-description: cms-arigeo dashboard logo/theme consistency audit — PR #124 (draft) fixes the logo-contrast root cause, flags builder-v2's separate sage/cream palette as a much bigger unresolved finding
+description: cms-arigeo dashboard logo/theme consistency audit — PR #124 fixed the logo-contrast root cause, MERGED and LIVE on cms.arigeo.com 2026-09-19; builder-v2's separate sage/cream palette flagged as a much bigger unresolved finding
 metadata:
   type: project
   ttl: 3mo
@@ -24,7 +24,9 @@ renders both wordmarks, toggled by `AdminTheme.tsx`'s `[data-theme]` CSS —
 that fix just never reached these two other spots.
 
 Fixed in [cms-arigeo PR #124](https://github.com/E0993599799/cms-arigeo/pull/124)
-(**draft**, branch `fix/dashboard-logo-theme-contrast`, not merged):
+(branch `fix/dashboard-logo-theme-contrast`) — **merged and live in production
+as of 2026-09-19** (squash commit `528e91c4`, พี่เอก confirmed the preview
+looked correct before merge):
 1. `AdminNav.tsx` — both wordmarks rendered, toggled via new CSS added to
    `dashboard-globals.css` (needed its own copy of the toggle because
    `AdminTheme.tsx`'s injected `<style>` only reaches Payload's `/admin`
@@ -63,9 +65,24 @@ deliberately opened as **draft** with an explicit test-plan requiring a real
 authenticated SSO click-through on a dispatched `vercel-prebuilt-build` →
 `-deploy` preview before merge.
 
+## Deploy note — vercel-prebuilt-deploy.yml's 15min timeout is too tight
+
+Dispatching `environment=production` for this repo took the Vercel CLI
+~14 minutes between "Building…" and "Completing…" — both of my attempts got
+killed by the GH Actions job's `timeout-minutes: 15` right at that point,
+reported as workflow conclusion **"cancelled"**. Despite that, the
+underlying `vercel deploy --prod` call kept running on Vercel's side and
+**did complete successfully both times** — confirmed via `get_deployment`
+on `cms.arigeo.com` (aliasError: null, readyState: READY, correct
+githubCommitSha) well after the GH job had already died. See
+[[2026-09-19-cms-arigeo-deploy-timeout-lesson]] — full detail in the
+mission-memory LESSON record (id 860) since this is an operational/workflow
+finding, not project state. **Lesson: "cancelled" on this specific workflow
+is not proof of failure — always verify via Vercel's own API before
+retrying or reporting a deploy as failed.**
+
 ## How to apply
 
-Don't let PR #124 merge on green CI alone — it needs a real screenshot from
-a human with SSO access first, same gate PR #121 used successfully after
-PR #119's revert. If/when the builder-v2 palette question gets an answer,
-treat it as its own separate, larger effort — do not fold it into #124.
+The logo/admin-preview fix is done and live — no further action needed on
+that half. If/when the builder-v2 palette question gets an answer, treat it
+as its own separate, larger effort — do not fold it into #124's scope.

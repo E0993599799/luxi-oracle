@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-19 · **Total Entries**: 20 · **Index Size**: ~600 tokens
+**Last Updated**: 2026-09-19 · **Total Entries**: 21 · **Index Size**: ~600 tokens
 
 ---
 
@@ -21,7 +21,8 @@
 - [Cloud routine sources must match prompt deps](learnings/2026-09-03_cloud-routine-sources-must-match-prompt-deps.md) — a routine's prompt naming a script doesn't add its repo to `sources`; verify explicitly (∞)
 
 - [cms-arigeo secrets still unrotated, 63 days](learnings/2026-09-18_cms-arigeo-secrets-still-unrotated-63-days.md) — one-shot routine's follow-up expired 2 weeks ago; re-verified live, still unrotated, fresh LINE nudge sent (project | 30d)
-- [cms-arigeo logo/theme audit — PR #124 draft](learnings/2026-09-19_cms-arigeo-logo-theme-audit.md) — fixed white-on-white sidebar logo + admin-preview off-token colors; builder-v2's own separate sage/cream palette (zero dark mode) flagged unresolved, needs a decision (project | 3mo)
+- [cms-arigeo logo/theme fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-logo-theme-audit.md) — PR #124 fixed white-on-white sidebar logo + admin-preview colors, live on cms.arigeo.com; builder-v2's separate sage/cream palette still unresolved (project | 3mo)
+- [cms-arigeo deploy workflow timeout lesson](learnings/2026-09-19-cms-arigeo-deploy-timeout-lesson.md) — vercel-prebuilt-deploy.yml's 15min job timeout is too tight; "cancelled" ≠ deploy failed, always verify via Vercel API (reference | ∞)
 
 - [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
 
