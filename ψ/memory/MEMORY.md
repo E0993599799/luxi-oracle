@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-17 · **Total Entries**: 18 · **Index Size**: ~600 tokens
+**Last Updated**: 2026-09-19 · **Total Entries**: 18 · **Index Size**: ~600 tokens
 
 ---
 
@@ -24,7 +24,7 @@
 
 - [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
 
-- [hr.arigeo.com live token audit — OPEN](../writing/2026-09-14_hr-arigeo-com-live-token-audit.md) — dashboard body text caps at 15px (below 16px baseline); navy-blue brand (`#38539a`) conflicts w/ auth.arigeo.com's red — resolve brand color before any visual pass (project | 3mo)
+- [hr.arigeo.com theme audit — RESOLVED](learnings/2026-09-19_hr-arigeo-com-theme-audit-resolved.md) — brand color (PR #75) + dashboard type scale (workspace-type-scale.css) both live in production; only spacing-base decision (4px vs 8px) still open (project | 3mo)
 - [coachhcm.com payroll UI/UX teardown](../writing/2026-09-14_coachhcm-payroll-uiux-research.md) — reference material feeding the hr.arigeo.com audit above; restraint/contrast/type findings, not independently actionable (reference | 3mo)
 - [auth.arigeo.com theme reconciliation — OPEN](../writing/2026-09-14_auth-arigeo-theme-spec.md) — proposed shadcn-naming migration (zero visual change), untouched in repo; dark mode explicitly deferred pending product ask (project | 3mo)
 
