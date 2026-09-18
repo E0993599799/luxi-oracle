@@ -49,11 +49,15 @@ from both the ARIGEO-red and Control-Fleet-blue palettes used in the rest of
 `/dashboard`, with no dark mode at all. Since builder-v2 is the canonical,
 most-used editor surface (see [[2026-09-01_cms-arigeo-three-builder-systems-not-one]]),
 this is almost certainly the single biggest contributor to "pages don't
-share a theme" — bigger than the logo bug. **Open question for พี่เอก**: is
-the sage/cream a deliberate, distinct "creative canvas" identity worth
-keeping, or should it be unified into the red/Control-Fleet system with
-dark-mode support added? Don't touch this without an answer — see the
-incident note below for why.
+share a theme" — bigger than the logo bug.
+
+**Decided 2026-09-19: unify, don't keep separate.** Implemented as
+[cms-arigeo PR #126](https://github.com/E0993599799/cms-arigeo/pull/126)
+(draft, branch `unify/builder-v2-brand-palette`) — see
+[[2026-09-19_cms-arigeo-builder-v2-palette-unify]] for the full method and
+current status. Not yet merged as of this writing; needs a real visual
+pass, likely more than one round given the scale (~350 individual color
+rules touched).
 
 ## Process constraint — carried forward from the PR #121 incident
 
