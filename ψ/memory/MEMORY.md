@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-19 · **Total Entries**: 22 · **Index Size**: ~600 tokens
+**Last Updated**: 2026-09-19 · **Total Entries**: 24 · **Index Size**: ~600 tokens
 
 ---
 
@@ -24,6 +24,8 @@
 - [cms-arigeo logo/theme fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-logo-theme-audit.md) — PR #124 fixed white-on-white sidebar logo + admin-preview colors, live on cms.arigeo.com (project | 3mo)
 - [cms-arigeo builder-v2 palette unify — PR #126 draft](learnings/2026-09-19_cms-arigeo-builder-v2-palette-unify.md) — mechanical HSL remap of 129 colors onto shared tokens, gets dark mode free, not yet visually verified (project | 3mo)
 - [cms-arigeo deploy workflow timeout lesson](learnings/2026-09-19-cms-arigeo-deploy-timeout-lesson.md) — vercel-prebuilt-deploy.yml's 15min job timeout is too tight; "cancelled" ≠ deploy failed, always verify via Vercel API (reference | ∞)
+- [cms-arigeo dashboard frame fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-dashboard-frame-fix.md) — PR #127, stale dashboard-layout.scss overriding dark-mode tokens since PR #121, found via live browser inspection; 3rd legacy admin shell flagged (project | 3mo)
+- [arigeo-hr module icons — MERGED & LIVE](learnings/2026-09-19_arigeo-hr-module-icons.md) — PR #79, 9-icon flat full-color SVG set hand-authored from reference PNG + spring-easing hover motion (project | 3mo)
 
 - [Size memory artifact to what it tracks](learnings/2026-09-03_size-memory-artifact-to-what-it-tracks.md) — don't reach for a full frontmatter'd file when a Next Steps line already covers a one-off reminder (∞)
 
