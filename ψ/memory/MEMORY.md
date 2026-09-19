@@ -26,6 +26,7 @@
 - [cms-arigeo deploy workflow timeout lesson](learnings/2026-09-19-cms-arigeo-deploy-timeout-lesson.md) — vercel-prebuilt-deploy.yml's 15min job timeout is too tight; "cancelled" ≠ deploy failed, always verify via Vercel API (reference | ∞)
 - [cms-arigeo dashboard frame fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-dashboard-frame-fix.md) — PR #127, stale dashboard-layout.scss overriding dark-mode tokens since PR #121, found via live browser inspection; 3rd legacy admin shell flagged (project | 3mo)
 - [arigeo-hr module icons — MERGED & LIVE](learnings/2026-09-19_arigeo-hr-module-icons.md) — PR #79, 9-icon flat full-color SVG set hand-authored from reference PNG + spring-easing hover motion (project | 3mo)
+- [cms-arigeo theme switcher + input unify — PR #128 draft](learnings/2026-09-19_cms-arigeo-theme-switcher-and-input-unify.md) — dashboard theme toggle + shadcn Input/password-input DRY pass; only compiled-token proxy verified, needs live confirmation before merge (project | 3mo)
 - [Stale duplicate CSS rule wins the cascade](learnings/2026-09-19_stale-duplicate-css-rule-wins-cascade.md) — computed style disagreeing with correct custom properties means check document.styleSheets for a second later-loaded rule, not that the token system is broken (reference | ∞)
 - ["Cancelled" CI job ≠ proof the remote op failed](learnings/2026-09-19_deploy-cancelled-not-proof-of-failure.md) — orchestrator timeout/cancelled only means the watcher died; verify the remote system's own API state before retrying (reference | ∞)
 
