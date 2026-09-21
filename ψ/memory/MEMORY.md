@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-19 · **Total Entries**: 24 · **Index Size**: ~600 tokens
+**Last Updated**: 2026-09-21 · **Total Entries**: 24 · **Index Size**: ~600 tokens
 
 ---
 
@@ -22,11 +22,11 @@
 
 - [cms-arigeo secrets still unrotated, 63 days](learnings/2026-09-18_cms-arigeo-secrets-still-unrotated-63-days.md) — one-shot routine's follow-up expired 2 weeks ago; re-verified live, still unrotated, fresh LINE nudge sent (project | 30d)
 - [cms-arigeo logo/theme fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-logo-theme-audit.md) — PR #124 fixed white-on-white sidebar logo + admin-preview colors, live on cms.arigeo.com (project | 3mo)
-- [cms-arigeo builder-v2 palette unify — PR #126 draft](learnings/2026-09-19_cms-arigeo-builder-v2-palette-unify.md) — mechanical HSL remap of 129 colors onto shared tokens, gets dark mode free, not yet visually verified (project | 3mo)
+- [cms-arigeo builder-v2 palette unify — PR #126 MERGED](learnings/2026-09-19_cms-arigeo-builder-v2-palette-unify.md) — mechanical HSL remap of 129 colors onto shared tokens, merged 2026-09-21 (project | 3mo)
 - [cms-arigeo deploy workflow timeout lesson](learnings/2026-09-19-cms-arigeo-deploy-timeout-lesson.md) — vercel-prebuilt-deploy.yml's 15min job timeout is too tight; "cancelled" ≠ deploy failed, always verify via Vercel API (reference | ∞)
 - [cms-arigeo dashboard frame fix — MERGED & LIVE](learnings/2026-09-19_cms-arigeo-dashboard-frame-fix.md) — PR #127, stale dashboard-layout.scss overriding dark-mode tokens since PR #121, found via live browser inspection; 3rd legacy admin shell flagged (project | 3mo)
 - [arigeo-hr module icons — MERGED & LIVE](learnings/2026-09-19_arigeo-hr-module-icons.md) — PR #79, 9-icon flat full-color SVG set hand-authored from reference PNG + spring-easing hover motion (project | 3mo)
-- [cms-arigeo theme switcher + input unify — PR #128 draft](learnings/2026-09-19_cms-arigeo-theme-switcher-and-input-unify.md) — dashboard theme toggle + shadcn Input/password-input DRY pass; only compiled-token proxy verified, needs live confirmation before merge (project | 3mo)
+- [cms-arigeo theme switcher + input unify — PR #128 MERGED](learnings/2026-09-19_cms-arigeo-theme-switcher-and-input-unify.md) — dashboard theme toggle + shadcn Input/password-input DRY pass; merged 2026-09-21 (project | 3mo)
 - [Stale duplicate CSS rule wins the cascade](learnings/2026-09-19_stale-duplicate-css-rule-wins-cascade.md) — computed style disagreeing with correct custom properties means check document.styleSheets for a second later-loaded rule, not that the token system is broken (reference | ∞)
 - ["Cancelled" CI job ≠ proof the remote op failed](learnings/2026-09-19_deploy-cancelled-not-proof-of-failure.md) — orchestrator timeout/cancelled only means the watcher died; verify the remote system's own API state before retrying (reference | ∞)
 
@@ -34,7 +34,7 @@
 
 - [hr.arigeo.com theme audit — RESOLVED](learnings/2026-09-19_hr-arigeo-com-theme-audit-resolved.md) — brand color (PR #75) + dashboard type scale (workspace-type-scale.css) both live in production; only spacing-base decision (4px vs 8px) still open (project | 3mo)
 - [coachhcm.com payroll UI/UX teardown](../writing/2026-09-14_coachhcm-payroll-uiux-research.md) — reference material feeding the hr.arigeo.com audit above; restraint/contrast/type findings, not independently actionable (reference | 3mo)
-- [auth.arigeo.com theme reconciliation — PR #71 open](learnings/2026-09-19_auth-arigeo-com-pr71-theme-work.md) — shadcn rename + alert recipe + full dark mode; not yet verified live, hero-tile skipped (project | 3mo)
+- [auth.arigeo.com theme reconciliation — PR #71 MERGED](learnings/2026-09-19_auth-arigeo-com-pr71-theme-work.md) — shadcn rename + alert recipe + full dark mode; merged 2026-09-21, hero-tile skipped (project | 3mo)
 
 ## Reference
 - [shadcnblocks-admin dropdown+theme patterns](learnings/2026-09-13_shadcnblocks-admin-dropdown-theme-patterns.md) — shadcn kit patterns for cms-arigeo reuse; PLUS: cms.arigeo.com's real admin is stock Payload theme, zero brand-color bleed, toggle unreachable w/o login (reference | ∞)

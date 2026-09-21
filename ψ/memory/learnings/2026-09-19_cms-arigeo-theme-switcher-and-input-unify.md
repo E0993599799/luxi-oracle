@@ -58,3 +58,11 @@ or a standalone harness using the exact real class names — is a reasonable
 substitute for *deterministic* CSS checks, but is not equivalent to seeing the
 actual page render, and should not be reported as "visually verified" without
 that caveat attached.
+
+## Status update (2026-09-21)
+
+Verified via `gh pr view 128 --repo E0993599799/cms-arigeo`: **MERGED**
+(no longer draft). Fourth instance this week of a "draft, pending live
+confirmation" memory going stale before the next session checked it — see
+the same correction on [[2026-09-19_cms-arigeo-builder-v2-palette-unify]]
+and [[auth-arigeo-com-pr71-theme-work]].

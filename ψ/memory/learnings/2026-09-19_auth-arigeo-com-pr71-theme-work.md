@@ -45,3 +45,10 @@ E0993599799/arigeo-auth` rather than assuming it's still open — see
 [[2026-09-19_hr-arigeo-com-theme-audit-resolved]] for why: memory said
 hr.arigeo.com's own theme work was still pending when it had actually
 already shipped.
+
+## Status update (2026-09-21)
+
+Verified via `gh pr view 71 --repo E0993599799/arigeo-auth`: **MERGED**
+(no longer open). Same pattern repeated a third time — see
+[[2026-09-19_hr-arigeo-com-theme-audit-resolved]] and the builder-v2 status
+update above.

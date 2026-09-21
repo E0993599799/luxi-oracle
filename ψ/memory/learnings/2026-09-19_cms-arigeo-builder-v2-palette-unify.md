@@ -60,3 +60,9 @@ Given the scale, expect this to need more than one round of visual
 feedback, unlike #124's single pass — don't be surprised if the first
 preview needs adjustments. Re-check `gh pr view 126 --repo
 E0993599799/cms-arigeo` before assuming current state.
+
+## Status update (2026-09-21)
+
+Verified via `gh pr view 126 --repo E0993599799/cms-arigeo`: **MERGED**
+(no longer draft). Visual review apparently completed and resolved between
+2026-09-19 and this check.
