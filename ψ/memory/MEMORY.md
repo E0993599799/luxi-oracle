@@ -2,7 +2,7 @@
 
 > **Index of all persistent memories** — fast lookup, one-line hooks. < 200 lines.
 
-**Last Updated**: 2026-09-21 · **Total Entries**: 24 · **Index Size**: ~600 tokens
+**Last Updated**: 2026-09-22 · **Total Entries**: 25 · **Index Size**: ~600 tokens
 
 ---
 
@@ -35,6 +35,7 @@
 - [hr.arigeo.com theme audit — RESOLVED](learnings/2026-09-19_hr-arigeo-com-theme-audit-resolved.md) — brand color (PR #75) + dashboard type scale (workspace-type-scale.css) both live in production; only spacing-base decision (4px vs 8px) still open (project | 3mo)
 - [coachhcm.com payroll UI/UX teardown](../writing/2026-09-14_coachhcm-payroll-uiux-research.md) — reference material feeding the hr.arigeo.com audit above; restraint/contrast/type findings, not independently actionable (reference | 3mo)
 - [auth.arigeo.com theme reconciliation — PR #71 MERGED](learnings/2026-09-19_auth-arigeo-com-pr71-theme-work.md) — shadcn rename + alert recipe + full dark mode; merged 2026-09-21, hero-tile skipped (project | 3mo)
+- [pharmacy-expiry-system Maven theme PAUSED](learnings/2026-09-22_pharmacy-maven-theme-superseded-by-bpmp.md) — PR #41's theme is stale, master already shipped a different grayscale "BPMP" theme 10 days after this branch forked; also 10+ concurrent worktrees active on this repo (project | 3mo)
 
 ## Reference
 - [shadcnblocks-admin dropdown+theme patterns](learnings/2026-09-13_shadcnblocks-admin-dropdown-theme-patterns.md) — shadcn kit patterns for cms-arigeo reuse; PLUS: cms.arigeo.com's real admin is stock Payload theme, zero brand-color bleed, toggle unreachable w/o login (reference | ∞)
